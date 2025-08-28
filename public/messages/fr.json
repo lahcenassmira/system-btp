@@ -1,0 +1,45 @@
+{
+  "nav": {
+    "dashboard": "Tableau de bord",
+    "products": "Produits",
+    "sales": "Ventes",
+    "purchases": "Achats",
+    "customers": "Clients",
+    "credit": "Crédit",
+    "returns": "Retours",
+    "invoices": "Factures",
+    "analytics": "Analytics",
+    "settings": "Paramètres",
+    "logout": "Déconnexion",
+    "language": "Langue"
+  },
+  "common": {
+    "add": "Ajouter",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "search": "Rechercher",
+    "select": "Sélectionner",
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès",
+    "confirmation": "Confirmation",
+    "yes": "Oui",
+    "no": "Non",
+    "close": "Fermer",
+    "currency": "MAD"
+  },
+  "products": {
+    "noProductsFound": "Aucun produit trouvé",
+    "selectProduct": "Sélectionner un produit",
+    "searchProducts": "Rechercher des produits..."
+  },
+  "invoices": {
+    "title": "Factures",
+    "manageInvoices": "Gérer les factures",
+    "createInvoice": "Créer une facture",
+    "createNewInvoice": "Créer une nouvelle facture",
+    "fillInvoiceDetails": "Remplissez les détails de la facture"
+  }
+}

@@ -1,0 +1,279 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import { showError, showSuccess } from '@/lib/toast';
+import Link from 'next/link';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { AlertCircle, Loader2, Store, Globe, Mail, Phone } from 'lucide-react';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { useLanguageContext } from '@/components/LanguageProvider';
+
+export default function RegisterPage() {
+  const { t, locale } = useLanguageContext();
+  const [formData, setFormData] = useState({
+    email: '',
+    phone: '',
+    password: '',
+    confirmPassword: '',
+    preferredLanguage: 'fr',
+  });
+  const [registrationType, setRegistrationType] = useState<'email' | 'phone'>('email');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  console.log('Register page rendered');
+
+  // Pre-fill form data from URL parameters (from landing page)
+  useEffect(() => {
+    const name = searchParams?.get('name');
+    const phone = searchParams?.get('phone');
+    const email = searchParams?.get('email');
+
+    if (phone && !email) {
+      setRegistrationType('phone');
+      setFormData(prev => ({ ...prev, phone }));
+    } else if (email) {
+      setRegistrationType('email');
+      setFormData(prev => ({ ...prev, email }));
+    }
+  }, [searchParams]);
+
+  const handleInputChange = (field: string, value: string) => {
+    console.log(`Register form field changed: ${field} = ${value}`);
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
+    if (error) setError(''); // Clear error when user starts typing
+    if (success) setSuccess(''); // Clear success when user changes form
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('Register form submitted');
+    setLoading(true);
+    setError('');
+    setSuccess('');
+
+    try {
+      const response = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+      console.log('Register response received:', data);
+
+      if (!response.ok) {
+        setError(data.error || t('register.errors.registrationFailed'));
+        console.error('Registration failed:', data.error);
+        return;
+      }
+
+      console.log('Registration successful');
+      showSuccess(t('register.success.toast'));
+      setSuccess(t('register.success.message'));
+
+      // Redirect to login after 2 seconds
+      setTimeout(() => {
+        router.push('/login');
+      }, 2000);
+
+    } catch (err) {
+      console.error('Registration error:', err);
+      setError(t('register.errors.network'));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-amber-50 flex items-center justify-center p-4" data-macaly="register-container">
+      <Card className="w-full max-w-md shadow-lg border-0 bg-white/95 backdrop-blur-sm" data-macaly="register-card">
+        <CardHeader className="text-center space-y-4" data-macaly="register-header">
+          <div className="flex justify-center">
+            <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-amber-500 rounded-xl flex items-center justify-center">
+              <Store className="w-8 h-8 text-white" />
+            </div>
+          </div>
+          <div>
+            <CardTitle className="text-2xl font-bold text-gray-900" data-macaly="register-title">
+              {t('register.title')}
+            </CardTitle>
+            <CardDescription className="text-gray-600 mt-2" data-macaly="register-subtitle">
+              {t('register.subtitle')}
+            </CardDescription>
+          </div>
+        </CardHeader>
+
+        <CardContent className="space-y-6" data-macaly="register-form">
+          {error && (
+            <Alert variant="destructive" data-macaly="register-error">
+              <AlertCircle className="h-4 w-4" />
+              <AlertDescription>{error}</AlertDescription>
+            </Alert>
+          )}
+
+          {success && (
+            <Alert className="border-green-200 bg-green-50 text-green-800" data-macaly="register-success">
+              <AlertCircle className="h-4 w-4 text-green-600" />
+              <AlertDescription>{success}</AlertDescription>
+            </Alert>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {/* Registration Type Tabs */}
+            <Tabs value={registrationType} onValueChange={(value) => {
+              setRegistrationType(value as 'email' | 'phone');
+              setFormData(prev => ({ ...prev, email: '', phone: '' }));
+              setError('');
+            }}>
+              <TabsList className="grid w-full grid-cols-2">
+                <TabsTrigger value="email" className="flex items-center gap-2">
+                  <Mail className="w-4 h-4" />
+                  {t('register.tabs.email')}
+                </TabsTrigger>
+                <TabsTrigger value="phone" className="flex items-center gap-2">
+                  <Phone className="w-4 h-4" />
+                  {t('register.tabs.phone')}
+                </TabsTrigger>
+              </TabsList>
+
+              <TabsContent value="email" className="space-y-2 mt-4">
+                <Label htmlFor="email" className="text-sm font-medium text-gray-700">
+                  {t('register.labels.email')}
+                </Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder={t('register.placeholders.email')}
+                  value={formData.email}
+                  onChange={(e) => handleInputChange('email', e.target.value)}
+                  className="h-11 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                  disabled={loading}
+                  required={registrationType === 'email'}
+                  data-macaly="email-input"
+                />
+              </TabsContent>
+
+              <TabsContent value="phone" className="space-y-2 mt-4">
+                <Label htmlFor="phone" className="text-sm font-medium text-gray-700">
+                  {t('register.labels.phone')}
+                </Label>
+                <Input
+                  id="phone"
+                  type="tel"
+                  placeholder={t('register.placeholders.phone')}
+                  value={formData.phone}
+                  onChange={(e) => handleInputChange('phone', e.target.value)}
+                  className="h-11 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                  disabled={loading}
+                  required={registrationType === 'phone'}
+                  data-macaly="phone-input"
+                />
+                <p className="text-xs text-gray-500">
+                  {t('register.helper.phoneFormat')}
+                </p>
+              </TabsContent>
+            </Tabs>
+
+            <div className="space-y-2">
+              <Label htmlFor="password" className="text-sm font-medium text-gray-700">
+                {t('register.labels.password')}
+              </Label>
+              <Input
+                id="password"
+                type="password"
+                placeholder={t('register.placeholders.password')}
+                value={formData.password}
+                onChange={(e) => handleInputChange('password', e.target.value)}
+                className="h-11 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                disabled={loading}
+                required
+                data-macaly="password-input"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="confirmPassword" className="text-sm font-medium text-gray-700">
+                {t('register.labels.confirmPassword')}
+              </Label>
+              <Input
+                id="confirmPassword"
+                type="password"
+                placeholder={t('register.placeholders.confirmPassword')}
+                value={formData.confirmPassword}
+                onChange={(e) => handleInputChange('confirmPassword', e.target.value)}
+                className="h-11 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                disabled={loading}
+                required
+                data-macaly="confirm-password-input"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="language" className="text-sm font-medium text-gray-700 flex items-center gap-2">
+                <Globe className="w-4 h-4" />
+                {t('register.labels.preferredLanguage')}
+              </Label>
+              <Select
+                value={formData.preferredLanguage}
+                onValueChange={(value) => handleInputChange('preferredLanguage', value)}
+                disabled={loading}
+              >
+                <SelectTrigger className="h-11" data-macaly="language-select">
+                  <SelectValue placeholder={t('register.placeholders.language')} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="fr">🇫🇷 {t('register.select.fr')}</SelectItem>
+                  <SelectItem value="ar">🇲🇦 {t('register.select.ar')}</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <Button
+              type="submit"
+              className="w-full h-11 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium transition-all duration-200"
+              disabled={loading}
+              data-macaly="register-button"
+            >
+              {loading ? (
+                <>
+                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                  {t('register.button.creating')}
+                </>
+              ) : (
+                t('register.button.createAccount')
+              )}
+            </Button>
+          </form>
+
+          <div className="text-center pt-4 border-t border-gray-200">
+            <p className="text-sm text-gray-600">
+              {t('register.cta.haveAccount')}{' '}
+              <Link
+                href={`/login?lang=${locale}`}
+                className="font-medium text-blue-600 hover:text-blue-700 transition-colors"
+                data-macaly="login-link"
+              >
+                {t('register.cta.login')}
+              </Link>
+            </p>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
