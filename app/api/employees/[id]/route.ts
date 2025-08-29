@@ -8,7 +8,7 @@ import type { Permission } from '../../../../models/User';
 // GET - Fetch specific employee (owner only)
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await connectDB();
@@ -24,7 +24,7 @@ export async function GET(
     }
 
     const { user: tokenUser } = authCheck;
-    const { id: employeeId } = params;
+    const { id: employeeId } = await params;
 
     // Find employee in same shop
     const employee = await User.findOne({
@@ -66,7 +66,7 @@ export async function GET(
 // PUT - Update specific employee (owner only)
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await connectDB();
@@ -82,7 +82,7 @@ export async function PUT(
     }
 
     const { user: tokenUser } = authCheck;
-    const { id: employeeId } = params;
+    const { id: employeeId } = await params;
 
     const body = await request.json();
 
@@ -183,7 +183,7 @@ export async function PUT(
 // DELETE - Remove specific employee (owner only)
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await connectDB();
@@ -199,7 +199,7 @@ export async function DELETE(
     }
 
     const { user: tokenUser } = authCheck;
-    const { id: employeeId } = params;
+    const { id: employeeId } = await params;
 
     // Find and delete employee in same shop
     const deletedEmployee = await User.findOneAndDelete({

@@ -66,8 +66,7 @@ export const createEmployeeSchema = z.object({
   password: z.string()
     .min(6, 'Password must be at least 6 characters')
     .max(50, 'Password cannot exceed 50 characters'),
-  role: z.enum(['cashier', 'accountant', 'manager'] as const)
-    .refine(val => val !== 'owner', 'Cannot create owner through employee endpoint'),
+  role: z.enum(['cashier', 'accountant', 'manager'] as const),
   preferredLanguage: z.enum(['fr', 'ar']).default('fr'),
 }).refine(
   (data) => data.email || data.phone,

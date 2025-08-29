@@ -371,7 +371,7 @@ export default function EmployeesPage() {
               </div>
 
               {/* Permissions Section */}
-              {formData.role && formData.role !== 'owner' && (
+              {formData.role && (
                 <div className="space-y-3">
                   <div className="flex items-center space-x-2">
                     <Shield className="w-4 h-4" />
@@ -554,7 +554,7 @@ export default function EmployeesPage() {
             </div>
 
             {/* Permissions Section */}
-            {formData.role && formData.role !== 'owner' && (
+            {formData.role && (
               <div className="space-y-3">
                 <div className="flex items-center space-x-2">
                   <Shield className="w-4 h-4" />
@@ -731,7 +731,7 @@ export default function EmployeesPage() {
                               name: employee.name,
                               email: employee.email || '',
                               phone: employee.phone || '',
-                              role: employee.role,
+                              role: employee.role as 'cashier' | 'accountant' | 'manager',
                               preferredLanguage: employee.preferredLanguage,
                               password: '', // Don't prefill password
                             });

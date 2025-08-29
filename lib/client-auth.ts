@@ -30,6 +30,13 @@ export function getAuthToken(): string | null {
 }
 
 /**
+ * Alias for getAuthToken - for compatibility
+ */
+export function getAuthTokenFromCookie(): string | null {
+  return getAuthToken();
+}
+
+/**
  * Remove auth cookie (logout)
  */
 export function removeAuthCookie(): void {
