@@ -13,7 +13,7 @@ export interface JWTPayload {
   phone?: string;
   preferredLanguage: 'fr' | 'ar';
   role: UserRole;
-  shopId: string;
+  shopId?: string;
 }
 
 /**
@@ -164,7 +164,7 @@ export function authorizeRole(allowedRoles: UserRole[]) {
     try {
       // Get user from token
       const user = getUserFromRequest(request);
-      
+
       if (!user) {
         return { authorized: false, error: 'Authentication required' };
       }
@@ -188,7 +188,7 @@ export function authorizeRole(allowedRoles: UserRole[]) {
 export async function getAuthenticatedUser(request: NextRequest) {
   try {
     const tokenUser = getUserFromRequest(request);
-    
+
     if (!tokenUser) {
       return null;
     }

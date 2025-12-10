@@ -68,7 +68,7 @@ export async function POST(request: NextRequest) {
       phone: user.phone || undefined,
       preferredLanguage: user.preferredLanguage,
       role: user.role,
-      shopId: user.shopId.toString(),
+      shopId: user.shopId ? user.shopId.toString() : undefined,
     });
 
     // Create response with token in cookie
@@ -82,7 +82,7 @@ export async function POST(request: NextRequest) {
           phone: user.phone,
           preferredLanguage: user.preferredLanguage,
           role: user.role,
-          shopId: user.shopId,
+          shopId: user.shopId ? user.shopId.toString() : null,
         },
         token,
       },

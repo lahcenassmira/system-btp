@@ -21,7 +21,9 @@ import {
   ArrowUpRight,
   Download,
   Upload,
-  LayoutDashboard
+  LayoutDashboard,
+  ShieldAlert,
+  X
 } from 'lucide-react';
 import { getMessages, type Locale, getLocaleFromString } from '@/lib/i18n';
 import { useLanguageContext } from '@/components/LanguageProvider';
@@ -30,6 +32,7 @@ import { format } from 'date-fns';
 import { fr, ar } from 'date-fns/locale';
 import ImportDialog from '@/components/ImportDialog';
 import SalesAnalytics from '@/components/SalesAnalytics';
+import { useSearchParams } from 'next/navigation';
 
 interface DashboardData {
   metrics: {
@@ -49,18 +52,44 @@ interface DashboardData {
   topProducts: Array<any>;
 }
 
+interface UserData {
+  name: string;
+  role: 'owner' | 'cashier' | 'accountant' | 'manager';
+  email?: string;
+  phone?: string;
+}
+
 export default function DashboardPage() {
   const { locale, t } = useLanguageContext();
+  const searchParams = useSearchParams();
   const [data, setData] = useState<DashboardData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [importDialogOpen, setImportDialogOpen] = useState(false);
   const [importType, setImportType] = useState<'customers' | 'products'>('customers');
+  const [userData, setUserData] = useState<UserData | null>(null);
+  const [showPermissionError, setShowPermissionError] = useState(false);
   const messages = getMessages(locale);
 
   useEffect(() => {
+    // Load user data from localStorage
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      try {
+        setUserData(JSON.parse(storedUser));
+      } catch (err) {
+        console.error('Failed to parse user data:', err);
+      }
+    }
+
+    // Check for permission error in URL
+    const errorParam = searchParams.get('error');
+    if (errorParam === 'insufficient-permissions') {
+      setShowPermissionError(true);
+    }
+
     fetchDashboardData();
-  }, []);
+  }, [searchParams]);
 
   const fetchDashboardData = async () => {
     try {
@@ -160,6 +189,28 @@ export default function DashboardPage() {
   const handleImportComplete = () => {
     setImportDialogOpen(false);
     fetchDashboardData(); // Refresh dashboard data after import
+  };
+
+  // Helper function to get role display text
+  const getRoleDisplay = (role: string) => {
+    const roleMap: Record<string, { fr: string; ar: string }> = {
+      owner: { fr: 'Propriétaire', ar: 'مالك' },
+      manager: { fr: 'Gestionnaire', ar: 'مدير' },
+      accountant: { fr: 'Comptable', ar: 'محاسب' },
+      cashier: { fr: 'Caissier', ar: 'أمين الصندوق' }
+    };
+    return roleMap[role]?.[locale] || role;
+  };
+
+  // Helper function to get role badge color
+  const getRoleBadgeColor = (role: string) => {
+    const colorMap: Record<string, string> = {
+      owner: 'bg-purple-100 text-purple-800 border-purple-200',
+      manager: 'bg-blue-100 text-blue-800 border-blue-200',
+      accountant: 'bg-green-100 text-green-800 border-green-200',
+      cashier: 'bg-orange-100 text-orange-800 border-orange-200'
+    };
+    return colorMap[role] || 'bg-gray-100 text-gray-800 border-gray-200';
   };
 
   if (loading) {
@@ -317,6 +368,64 @@ export default function DashboardPage() {
 
         {/* Content */}
         <div className="p-6 space-y-8">
+          {/* Permission Error Alert */}
+          {showPermissionError && (
+            <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded-lg shadow-sm animate-in fade-in slide-in-from-top-2 duration-300">
+              <div className="flex items-start justify-between">
+                <div className="flex items-start gap-3">
+                  <ShieldAlert className="w-6 h-6 text-red-600 mt-0.5" />
+                  <div>
+                    <h3 className="font-semibold text-red-900 font-dm-sans">
+                      {locale === 'fr' ? 'Accès refusé' : 'تم رفض الوصول'}
+                    </h3>
+                    <p className="text-sm text-red-700 mt-1 font-inter">
+                      {locale === 'fr'
+                        ? "Vous n'avez pas les permissions nécessaires pour accéder à cette page. Veuillez contacter le propriétaire du magasin si vous pensez qu'il s'agit d'une erreur."
+                        : 'ليس لديك الأذونات اللازمة للوصول إلى هذه الصفحة. يرجى الاتصال بمالك المتجر إذا كنت تعتقد أن هذا خطأ.'}
+                    </p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setShowPermissionError(false)}
+                  className="text-red-600 hover:text-red-800 transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Role-Based Welcome Banner */}
+          {userData && (
+            <div className="bg-gradient-to-r from-emerald-50 via-teal-50 to-cyan-50 border border-emerald-200 rounded-xl p-6 shadow-sm">
+              <div className="flex items-center justify-between flex-wrap gap-4">
+                <div className="flex items-center gap-4">
+                  <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center text-white font-bold text-2xl shadow-lg">
+                    {userData.name.charAt(0).toUpperCase()}
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-bold text-gray-900 font-dm-sans">
+                      {locale === 'fr' ? 'Bienvenue' : 'مرحبا'}, {userData.name}!
+                    </h2>
+                    <div className="flex items-center gap-2 mt-1">
+                      <span className="text-sm text-gray-600 font-inter">
+                        {locale === 'fr' ? 'Vous êtes connecté en tant que' : 'أنت متصل كـ'}:
+                      </span>
+                      <Badge className={`${getRoleBadgeColor(userData.role)} border font-medium`}>
+                        {getRoleDisplay(userData.role)}
+                      </Badge>
+                    </div>
+                  </div>
+                </div>
+                {userData.email && (
+                  <div className="text-sm text-gray-600 font-inter">
+                    <span className="font-medium">{locale === 'fr' ? 'Email' : 'البريد الإلكتروني'}:</span> {userData.email}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
           {/* Modern KPI Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" data-macaly="metrics-grid">
             {metricCards.map((card, index) => {

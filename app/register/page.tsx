@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { showError, showSuccess } from '@/lib/toast';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -16,7 +16,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useLanguageContext } from '@/components/LanguageProvider';
 import type { RegisterOwnerData } from '@/lib/validations';
 
-export default function RegisterPage() {
+function RegisterForm() {
   const { t, locale } = useLanguageContext();
   const [formData, setFormData] = useState<Partial<RegisterOwnerData>>({
     name: '',
@@ -99,28 +99,27 @@ export default function RegisterPage() {
           const errorMessages = data.details.map((detail: any) => detail.message).join(', ');
           setError(errorMessages);
         } else {
-          setError(data.error || 'Registration failed');
+          setError(data.message || 'Registration failed');
         }
-        console.error('Registration failed:', data.error);
         return;
       }
 
-      console.log('Registration successful');
-      showSuccess('Owner and shop registered successfully! Redirecting to dashboard...');
-      setSuccess(`Registration successful! Shop ID: ${data.shopId}`);
+      // Success - save user data to localStorage
+      localStorage.setItem('user', JSON.stringify({
+        name: data.user?.name || formData.name,
+        email: data.user?.email || formData.email,
+        role: data.user?.role || 'owner'
+      }));
 
-      // The server has already set the httpOnly auth-token cookie
-      // Redirect to dashboard after 1 second
+      setSuccess('Account created successfully! Redirecting...');
+      console.log('Registration successful, redirecting to dashboard');
+
       setTimeout(() => {
-        console.log('Redirecting to dashboard after registration');
         router.push('/dashboard');
-        // Force page reload as fallback
-        window.location.href = '/dashboard';
-      }, 1000);
-
-    } catch (err) {
-      console.error('Registration error:', err);
-      setError('Network error occurred');
+      }, 1500);
+    } catch (error) {
+      console.error('Registration error:', error);
+      setError('An unexpected error occurred. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -453,5 +452,20 @@ export default function RegisterPage() {
         </CardContent>
       </Card>
     </div>
+  );
+}
+
+export default function RegisterPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-amber-50 flex items-center justify-center p-4">
+        <div className="flex items-center gap-2">
+          <Loader2 className="w-6 h-6 animate-spin text-blue-600" />
+          <span className="text-gray-600">Loading...</span>
+        </div>
+      </div>
+    }>
+      <RegisterForm />
+    </Suspense>
   );
 }

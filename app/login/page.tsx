@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { showError, showSuccess } from '@/lib/toast';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -12,7 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { AlertCircle, Loader2, Store } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
-export default function LoginPage() {
+function LoginForm() {
   const [formData, setFormData] = useState({
     identifier: '', // Changed from 'email' to 'identifier'
     password: '',
@@ -63,13 +63,16 @@ export default function LoginPage() {
 
       console.log('Login successful, redirecting to dashboard');
       showSuccess('Connexion réussie! Redirection en cours...');
-      // The server has already set the httpOnly auth-token cookie
-      // No need to store anything in localStorage since we use server-side auth
+
+      // Store user data in localStorage for dashboard display
+      if (data.user) {
+        localStorage.setItem('user', JSON.stringify(data.user));
+      }
 
       // Redirect to the original page or dashboard
       const redirectTo = (searchParams?.get('redirect')) || '/dashboard';
       console.log('Redirecting to:', redirectTo);
-      
+
       // Add a small delay to ensure cookie is set properly
       setTimeout(() => {
         console.log('Executing redirect now...');
@@ -184,5 +187,20 @@ export default function LoginPage() {
         </CardContent>
       </Card>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-amber-50 flex items-center justify-center p-4">
+        <div className="flex items-center gap-2">
+          <Loader2 className="w-6 h-6 animate-spin text-blue-600" />
+          <span className="text-gray-600">Loading...</span>
+        </div>
+      </div>
+    }>
+      <LoginForm />
+    </Suspense>
   );
 }
