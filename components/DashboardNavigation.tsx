@@ -18,6 +18,7 @@ import {
   Globe,
   RotateCcw,
   FileText,
+  ClipboardList,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -98,6 +99,12 @@ export default function DashboardNavigation({ user }: DashboardNavigationProps) 
       icon: FileText,
       label: messages.nav.invoices,
       color: 'text-teal-600',
+    },
+    {
+      href: '/dashboard/devis',
+      icon: ClipboardList,
+      label: 'Devis',
+      color: 'text-pink-600',
     },
     {
       href: '/dashboard/purchases',
