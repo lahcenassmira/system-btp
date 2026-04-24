@@ -26,8 +26,6 @@ const ChantierSchema: Schema = new Schema({
   },
   chantierNumber: {
     type: String,
-    required: [true, 'Chantier number is required'],
-    unique: true,
     trim: true,
   },
   devisId: {
@@ -88,7 +86,7 @@ const ChantierSchema: Schema = new Schema({
 
 // Indexes
 ChantierSchema.index({ userId: 1 });
-ChantierSchema.index({ chantierNumber: 1 });
+ChantierSchema.index({ chantierNumber: 1 }, { unique: true });
 ChantierSchema.index({ clientId: 1 });
 ChantierSchema.index({ status: 1 });
 ChantierSchema.index({ createdAt: -1 });

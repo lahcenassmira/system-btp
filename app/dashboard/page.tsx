@@ -202,23 +202,23 @@ export default function DashboardPage() {
     return roleMap[role]?.[locale] || role;
   };
 
-  // Helper function to get role badge color
-  const getRoleBadgeColor = (role: string) => {
-    const colorMap: Record<string, string> = {
-      owner: 'bg-purple-100 text-purple-800 border-purple-200',
-      manager: 'bg-blue-100 text-blue-800 border-blue-200',
-      accountant: 'bg-green-100 text-green-800 border-green-200',
-      cashier: 'bg-orange-100 text-orange-800 border-orange-200'
+  // Helper function to get role badge variant
+  const getRoleBadgeVariant = (role: string) => {
+    const variantMap: Record<string, string> = {
+      owner: 'premium',
+      manager: 'default',
+      accountant: 'success',
+      cashier: 'warning'
     };
-    return colorMap[role] || 'bg-gray-100 text-gray-800 border-gray-200';
+    return variantMap[role] || 'secondary';
   };
 
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-96">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600 font-inter">{messages.common.loading}</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0075de] mx-auto"></div>
+          <p className="mt-4 text-[#615d59]">{messages.common.loading}</p>
         </div>
       </div>
     );
@@ -228,9 +228,9 @@ export default function DashboardPage() {
     return (
       <div className="flex items-center justify-center min-h-96">
         <div className="text-center">
-          <AlertTriangle className="h-16 w-16 text-red-500 mx-auto mb-6" />
-          <h2 className="text-2xl font-semibold text-gray-900 mb-3 font-dm-sans">Erreur de chargement</h2>
-          <p className="text-gray-600 mb-6 font-inter">{error || 'Impossible de charger les données'}</p>
+          <AlertTriangle className="h-16 w-16 text-[#dd5b00] mx-auto mb-6" />
+          <h2 className="text-subheading text-[rgba(0,0,0,0.95)] mb-3">Erreur de chargement</h2>
+          <p className="text-[#615d59] mb-6">{error || 'Impossible de charger les données'}</p>
           <button onClick={fetchDashboardData} className="btn-primary">
             Réessayer
           </button>
@@ -245,52 +245,48 @@ export default function DashboardPage() {
       value: formatCurrency(data.metrics.todaySales.amount),
       subtitle: `${data.metrics.todaySales.count} ventes`,
       icon: ShoppingCart,
-      color: 'text-blue-600',
-      bgColor: 'bg-blue-50',
-      borderColor: 'border-blue-200'
+      color: 'text-[#0075de]',
+      bgColor: 'bg-[#f2f9ff]',
     },
     {
       title: messages.dashboard.totalProfit,
       value: formatCurrency(data.metrics.todayProfit),
       subtitle: 'Profit aujourd\'hui',
       icon: TrendingUp,
-      color: 'text-green-600',
-      bgColor: 'bg-green-50',
-      borderColor: 'border-green-200'
+      color: 'text-[#1aae39]',
+      bgColor: 'bg-[#e6f7e9]',
     },
     {
       title: messages.dashboard.totalCustomers,
       value: data.metrics.totalCustomers.toString(),
       subtitle: 'Clients actifs',
       icon: Users,
-      color: 'text-purple-600',
-      bgColor: 'bg-purple-50',
-      borderColor: 'border-purple-200'
+      color: 'text-[#391c57]',
+      bgColor: 'bg-[#f0e6f6]',
     },
     {
       title: messages.dashboard.lowStock,
       value: data.metrics.lowStockCount.toString(),
       subtitle: 'Produits en rupture',
       icon: AlertTriangle,
-      color: 'text-red-600',
-      bgColor: 'bg-red-50',
-      borderColor: 'border-red-200'
+      color: 'text-[#dd5b00]',
+      bgColor: 'bg-[#fff0e6]',
     }
   ];
 
   return (
-    <div className="bg-neutral-light" data-macaly="dashboard-container">
+    <div className="bg-white" data-macaly="dashboard-container">
       {/* Main Content */}
       <div data-macaly="dashboard-main">
         {/* Page Header */}
-        <div className="bg-white border-b border-gray-100 px-6 py-8">
+        <div className="bg-white border-b border-[rgba(0,0,0,0.06)] px-6 py-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 font-dm-sans flex items-center gap-3" data-macaly="dashboard-title">
-                <LayoutDashboard className="h-8 w-8 text-emerald-500" />
+              <h1 className="text-subheading font-bold text-[rgba(0,0,0,0.95)] flex items-center gap-3" data-macaly="dashboard-title">
+                <LayoutDashboard className="h-7 w-7 text-[#0075de]" />
                 {messages.dashboard.title}
               </h1>
-              <p className="text-gray-600 mt-2 font-inter">
+              <p className="text-[#615d59] mt-2 text-caption">
                 {formatDate(new Date(), locale, 'EEEE, dd MMMM yyyy')}
               </p>
             </div>
@@ -370,15 +366,15 @@ export default function DashboardPage() {
         <div className="p-6 space-y-8">
           {/* Permission Error Alert */}
           {showPermissionError && (
-            <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded-lg shadow-sm animate-in fade-in slide-in-from-top-2 duration-300">
+            <div className="bg-[#fff0e6] border-l-4 border-[#dd5b00] p-4 rounded-notion-card animate-in fade-in slide-in-from-top-2 duration-300">
               <div className="flex items-start justify-between">
                 <div className="flex items-start gap-3">
-                  <ShieldAlert className="w-6 h-6 text-red-600 mt-0.5" />
+                  <ShieldAlert className="w-6 h-6 text-[#dd5b00] mt-0.5" />
                   <div>
-                    <h3 className="font-semibold text-red-900 font-dm-sans">
+                    <h3 className="font-semibold text-[#dd5b00]">
                       {locale === 'fr' ? 'Accès refusé' : 'تم رفض الوصول'}
                     </h3>
-                    <p className="text-sm text-red-700 mt-1 font-inter">
+                    <p className="text-sm text-[#c45000] mt-1">
                       {locale === 'fr'
                         ? "Vous n'avez pas les permissions nécessaires pour accéder à cette page. Veuillez contacter le propriétaire du magasin si vous pensez qu'il s'agit d'une erreur."
                         : 'ليس لديك الأذونات اللازمة للوصول إلى هذه الصفحة. يرجى الاتصال بمالك المتجر إذا كنت تعتقد أن هذا خطأ.'}
@@ -387,7 +383,7 @@ export default function DashboardPage() {
                 </div>
                 <button
                   onClick={() => setShowPermissionError(false)}
-                  className="text-red-600 hover:text-red-800 transition-colors"
+                  className="text-[#dd5b00] hover:text-[#c45000] transition-colors"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -397,28 +393,28 @@ export default function DashboardPage() {
 
           {/* Role-Based Welcome Banner */}
           {userData && (
-            <div className="bg-gradient-to-r from-emerald-50 via-teal-50 to-cyan-50 border border-emerald-200 rounded-xl p-6 shadow-sm">
+            <div className="bg-[#f2f9ff] border border-[rgba(0,117,222,0.12)] rounded-notion-card p-6">
               <div className="flex items-center justify-between flex-wrap gap-4">
                 <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center text-white font-bold text-2xl shadow-lg">
+                  <div className="w-14 h-14 bg-[#0075de] rounded-full flex items-center justify-center text-white font-bold text-xl shadow-notion-md">
                     {userData.name.charAt(0).toUpperCase()}
                   </div>
                   <div>
-                    <h2 className="text-2xl font-bold text-gray-900 font-dm-sans">
+                    <h2 className="text-card-title font-bold text-[rgba(0,0,0,0.95)]">
                       {locale === 'fr' ? 'Bienvenue' : 'مرحبا'}, {userData.name}!
                     </h2>
                     <div className="flex items-center gap-2 mt-1">
-                      <span className="text-sm text-gray-600 font-inter">
+                      <span className="text-caption text-[#615d59]">
                         {locale === 'fr' ? 'Vous êtes connecté en tant que' : 'أنت متصل كـ'}:
                       </span>
-                      <Badge className={`${getRoleBadgeColor(userData.role)} border font-medium`}>
+                      <Badge variant={getRoleBadgeVariant(userData.role) as any}>
                         {getRoleDisplay(userData.role)}
                       </Badge>
                     </div>
                   </div>
                 </div>
                 {userData.email && (
-                  <div className="text-sm text-gray-600 font-inter">
+                  <div className="text-caption text-[#615d59]">
                     <span className="font-medium">{locale === 'fr' ? 'Email' : 'البريد الإلكتروني'}:</span> {userData.email}
                   </div>
                 )}
@@ -431,21 +427,21 @@ export default function DashboardPage() {
             {metricCards.map((card, index) => {
               const IconComponent = card.icon;
               return (
-                <div key={index} className="kpi-card group">
+                <div key={index} className="kpi-card group animate-fade-in-up" style={{ animationDelay: `${index * 80}ms` }}>
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
-                      <p className="text-sm font-medium text-gray-600 mb-2 font-inter">
+                      <p className="text-caption font-medium text-[#615d59] mb-2">
                         {card.title}
                       </p>
-                      <p className="text-3xl font-bold text-gray-900 mb-1 font-dm-sans">
+                      <p className="text-subheading font-bold text-[rgba(0,0,0,0.95)] mb-1">
                         {card.value}
                       </p>
-                      <p className="text-sm text-gray-500 font-inter">
+                      <p className="text-badge-text text-[#a39e98]">
                         {card.subtitle}
                       </p>
                     </div>
-                    <div className={`w-14 h-14 ${card.bgColor} rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                      <IconComponent className={`w-7 h-7 ${card.color}`} />
+                    <div className={`w-12 h-12 ${card.bgColor} rounded-notion-card flex items-center justify-center group-hover:scale-105 transition-transform duration-200`}>
+                      <IconComponent className={`w-6 h-6 ${card.color}`} />
                     </div>
                   </div>
                 </div>
@@ -457,22 +453,22 @@ export default function DashboardPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div className="modern-card" data-macaly="weekly-overview">
               <div className="p-6">
-                <h3 className="text-lg font-semibold text-gray-900 font-dm-sans flex items-center gap-3 mb-4">
-                  <Calendar className="w-5 h-5 text-emerald-600" />
+                <h3 className="text-body font-semibold text-[rgba(0,0,0,0.95)] flex items-center gap-3 mb-4">
+                  <Calendar className="w-5 h-5 text-[#0075de]" />
                   Aperçu hebdomadaire
                 </h3>
                 <div className="space-y-4">
                   <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-600 font-inter">Ventes cette semaine</span>
-                    <span className="font-bold font-dm-sans">{formatCurrency(data.metrics.weekSales.amount)}</span>
+                    <span className="text-caption text-[#615d59]">Ventes cette semaine</span>
+                    <span className="font-bold text-[rgba(0,0,0,0.95)]">{formatCurrency(data.metrics.weekSales.amount)}</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-600 font-inter">Profit estimé</span>
-                    <span className="font-bold text-emerald-600 font-dm-sans">{formatCurrency(data.metrics.weekProfit)}</span>
+                    <span className="text-caption text-[#615d59]">Profit estimé</span>
+                    <span className="font-bold text-[#1aae39]">{formatCurrency(data.metrics.weekProfit)}</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-600 font-inter">Nombre de ventes</span>
-                    <span className="font-bold font-dm-sans">{data.metrics.weekSales.count}</span>
+                    <span className="text-caption text-[#615d59]">Nombre de ventes</span>
+                    <span className="font-bold text-[rgba(0,0,0,0.95)]">{data.metrics.weekSales.count}</span>
                   </div>
                 </div>
               </div>
@@ -480,22 +476,22 @@ export default function DashboardPage() {
 
             <div className="modern-card" data-macaly="monthly-overview">
               <div className="p-6">
-                <h3 className="text-lg font-semibold text-gray-900 font-dm-sans flex items-center gap-3 mb-4">
-                  <Calendar className="w-5 h-5 text-purple-600" />
+                <h3 className="text-body font-semibold text-[rgba(0,0,0,0.95)] flex items-center gap-3 mb-4">
+                  <Calendar className="w-5 h-5 text-[#391c57]" />
                   Aperçu mensuel
                 </h3>
                 <div className="space-y-4">
                   <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-600 font-inter">Ventes ce mois</span>
-                    <span className="font-bold font-dm-sans">{formatCurrency(data.metrics.monthSales.amount)}</span>
+                    <span className="text-caption text-[#615d59]">Ventes ce mois</span>
+                    <span className="font-bold text-[rgba(0,0,0,0.95)]">{formatCurrency(data.metrics.monthSales.amount)}</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-600 font-inter">Profit estimé</span>
-                    <span className="font-bold text-emerald-600 font-dm-sans">{formatCurrency(data.metrics.monthProfit)}</span>
+                    <span className="text-caption text-[#615d59]">Profit estimé</span>
+                    <span className="font-bold text-[#1aae39]">{formatCurrency(data.metrics.monthProfit)}</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-600 font-inter">Nombre de ventes</span>
-                    <span className="font-bold font-dm-sans">{data.metrics.monthSales.count}</span>
+                    <span className="text-caption text-[#615d59]">Nombre de ventes</span>
+                    <span className="font-bold text-[rgba(0,0,0,0.95)]">{data.metrics.monthSales.count}</span>
                   </div>
                 </div>
               </div>
@@ -507,8 +503,8 @@ export default function DashboardPage() {
             {/* Stock Alerts */}
             <Card data-macaly="stock-alerts">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <AlertTriangle className="w-5 h-5 text-red-600" />
+                <CardTitle className="flex items-center gap-2 text-body">
+                  <AlertTriangle className="w-5 h-5 text-[#dd5b00]" />
                   {messages.dashboard.stockAlerts}
                 </CardTitle>
                 <CardDescription>
@@ -517,18 +513,18 @@ export default function DashboardPage() {
               </CardHeader>
               <CardContent>
                 {data.lowStockProducts.length === 0 ? (
-                  <p className="text-gray-500 text-sm">Aucun produit en rupture de stock</p>
+                  <p className="text-[#a39e98] text-caption">Aucun produit en rupture de stock</p>
                 ) : (
                   <div className="space-y-3">
                     {data.lowStockProducts.slice(0, 5).map((product, index) => (
-                      <div key={index} className="flex items-center justify-between p-3 bg-red-50 rounded-lg border border-red-200">
+                      <div key={index} className="flex items-center justify-between p-3 bg-[#fff0e6] rounded-notion-btn border border-[rgba(221,91,0,0.12)]">
                         <div>
-                          <p className="font-medium text-gray-900">{product.name}</p>
-                          <p className="text-sm text-gray-600">
+                          <p className="font-medium text-[rgba(0,0,0,0.95)] text-caption">{product.name}</p>
+                          <p className="text-badge-text text-[#615d59]">
                             Stock: {product.quantity} {product.unit}
                           </p>
                         </div>
-                        <Badge variant="destructive" className="text-xs">
+                        <Badge variant="destructive" className="text-badge-text">
                           Critique
                         </Badge>
                       </div>
@@ -541,8 +537,8 @@ export default function DashboardPage() {
             {/* Recent Sales */}
             <Card data-macaly="recent-sales">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Eye className="w-5 h-5 text-green-600" />
+                <CardTitle className="flex items-center gap-2 text-body">
+                  <Eye className="w-5 h-5 text-[#1aae39]" />
                   {messages.dashboard.recentSales}
                 </CardTitle>
                 <CardDescription>
@@ -551,26 +547,26 @@ export default function DashboardPage() {
               </CardHeader>
               <CardContent>
                 {data.recentSales.length === 0 ? (
-                  <p className="text-gray-500 text-sm">Aucune vente récente</p>
+                  <p className="text-[#a39e98] text-caption">Aucune vente récente</p>
                 ) : (
                   <div className="space-y-3">
                     {data.recentSales.slice(0, 5).map((sale, index) => (
-                      <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                      <div key={index} className="flex items-center justify-between p-3 bg-[#f6f5f4] rounded-notion-btn">
                         <div>
-                          <p className="font-medium text-gray-900">
+                          <p className="font-medium text-[rgba(0,0,0,0.95)] text-caption">
                             {sale.productId?.name || 'Produit supprimé'}
                           </p>
-                          <p className="text-sm text-gray-600">
+                          <p className="text-badge-text text-[#615d59]">
                             {sale.quantity} {sale.productId?.unit} • {formatDateLocal(sale.saleDate)}
                           </p>
                         </div>
                         <div className="text-right">
-                          <p className="font-bold text-gray-900">
+                          <p className="font-bold text-[rgba(0,0,0,0.95)] text-caption">
                             {formatCurrency(sale.totalAmount)}
                           </p>
                           <Badge
-                            variant={sale.isPaid ? "secondary" : "destructive"}
-                            className="text-xs"
+                            variant={sale.isPaid ? "success" : "destructive"}
+                            className="text-badge-text"
                           >
                             {sale.isPaid ? 'Payé' : 'Crédit'}
                           </Badge>
@@ -585,22 +581,22 @@ export default function DashboardPage() {
 
           {/* Credit Overview */}
           {data.metrics.unpaidCredits.count > 0 && (
-            <div className="modern-card border-l-4 border-amber-500 bg-gradient-to-r from-amber-50 to-orange-50" data-macaly="credit-overview">
+            <div className="modern-card border-l-4 border-[#dd5b00]" data-macaly="credit-overview">
               <div className="p-6">
-                <h3 className="text-lg font-semibold text-amber-800 font-dm-sans flex items-center gap-3 mb-4">
+                <h3 className="text-body font-semibold text-[#dd5b00] flex items-center gap-3 mb-4">
                   <TrendingDown className="w-5 h-5" />
                   Crédits en attente
                 </h3>
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-amber-700 font-inter mb-2">
+                    <p className="text-caption text-[#615d59] mb-2">
                       {data.metrics.unpaidCredits.count} ventes à crédit non payées
                     </p>
-                    <p className="text-3xl font-bold text-amber-800 font-dm-sans">
+                    <p className="text-subheading font-bold text-[#dd5b00]">
                       {formatCurrency(data.metrics.unpaidCredits.amount)}
                     </p>
                   </div>
-                  <button className="btn-secondary border-amber-300 text-amber-700 hover:bg-amber-100">
+                  <button className="btn-secondary border-[#dd5b00] text-[#dd5b00] hover:bg-[#fff0e6]">
                     Voir les détails
                   </button>
                 </div>
@@ -611,10 +607,10 @@ export default function DashboardPage() {
           {/* Analytics Charts Section */}
           <div className="space-y-8">
             <div className="flex items-center justify-between">
-              <h2 className="text-3xl font-bold text-gray-900 font-dm-sans">Analyses des ventes</h2>
-              <div className="px-4 py-2 bg-emerald-100 text-emerald-800 rounded-full text-sm font-medium font-inter">
+              <h2 className="text-card-title font-bold text-[rgba(0,0,0,0.95)]">Analyses des ventes</h2>
+              <Badge variant="default" className="text-caption">
                 Derniers 30 jours
-              </div>
+              </Badge>
             </div>
 
             <SalesAnalytics className="mb-8" locale={locale} />

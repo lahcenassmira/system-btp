@@ -9,7 +9,7 @@ export default async function DashboardLayout({
   const user = await requireAuth('/dashboard');
 
   return (
-    <div className="flex min-h-screen bg-neutral-light">
+    <div className="flex min-h-screen bg-white">
       <DashboardNavigation user={user} />
       <div className="flex-1 lg:ml-64">
         {children}

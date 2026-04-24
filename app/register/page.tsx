@@ -126,19 +126,19 @@ function RegisterForm() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-amber-50 flex items-center justify-center p-4" data-macaly="register-container">
-      <Card className="w-full max-w-md shadow-lg border-0 bg-white/95 backdrop-blur-sm" data-macaly="register-card">
+    <div className="min-h-screen bg-[#f6f5f4] flex items-center justify-center p-4" data-macaly="register-container">
+      <Card className="w-full max-w-md shadow-notion-lg border-0 bg-white" data-macaly="register-card">
         <CardHeader className="text-center space-y-4" data-macaly="register-header">
           <div className="flex justify-center">
-            <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-amber-500 rounded-xl flex items-center justify-center">
+            <div className="w-16 h-16 bg-[#0075de] rounded-notion-card flex items-center justify-center">
               <Store className="w-8 h-8 text-white" />
             </div>
           </div>
           <div>
-            <CardTitle className="text-2xl font-bold text-gray-900" data-macaly="register-title">
+            <CardTitle className="text-card-title font-bold text-[rgba(0,0,0,0.95)]" data-macaly="register-title">
               {t('register.title')}
             </CardTitle>
-            <CardDescription className="text-gray-600 mt-2" data-macaly="register-subtitle">
+            <CardDescription className="text-[#615d59] mt-2" data-macaly="register-subtitle">
               {t('register.subtitle')}
             </CardDescription>
           </div>
@@ -153,8 +153,8 @@ function RegisterForm() {
           )}
 
           {success && (
-            <Alert className="border-green-200 bg-green-50 text-green-800" data-macaly="register-success">
-              <AlertCircle className="h-4 w-4 text-green-600" />
+            <Alert className="border-[rgba(42,157,153,0.2)] bg-[#e6f7f6] text-[#2a9d99]" data-macaly="register-success">
+              <AlertCircle className="h-4 w-4 text-[#2a9d99]" />
               <AlertDescription>{success}</AlertDescription>
             </Alert>
           )}
@@ -162,11 +162,11 @@ function RegisterForm() {
           <form onSubmit={currentStep === 2 ? handleSubmit : (e) => { e.preventDefault(); handleNext(); }} className="space-y-4">
             {/* Step indicator */}
             <div className="flex items-center justify-center space-x-2 mb-6">
-              <div className={`flex items-center justify-center w-8 h-8 rounded-full text-sm font-medium ${currentStep >= 1 ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'}`}>
+              <div className={`flex items-center justify-center w-8 h-8 rounded-full text-sm font-medium ${currentStep >= 1 ? 'bg-[#0075de] text-white' : 'bg-[#f6f5f4] text-[#615d59]'}`}>
                 1
               </div>
-              <div className={`w-12 h-1 ${currentStep >= 2 ? 'bg-blue-600' : 'bg-gray-200'}`} />
-              <div className={`flex items-center justify-center w-8 h-8 rounded-full text-sm font-medium ${currentStep >= 2 ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'}`}>
+              <div className={`w-12 h-1 ${currentStep >= 2 ? 'bg-[#0075de]' : 'bg-[#f6f5f4]'}`} />
+              <div className={`flex items-center justify-center w-8 h-8 rounded-full text-sm font-medium ${currentStep >= 2 ? 'bg-[#0075de] text-white' : 'bg-[#f6f5f4] text-[#615d59]'}`}>
                 2
               </div>
             </div>
@@ -189,7 +189,7 @@ function RegisterForm() {
                     placeholder="Enter your full name"
                     value={formData.name || ''}
                     onChange={(e) => handleInputChange('name', e.target.value)}
-                    className="h-11 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                    className="h-11"
                     disabled={loading}
                     required
                     data-macaly="name-input"
@@ -223,7 +223,7 @@ function RegisterForm() {
                       placeholder="owner@example.com"
                       value={formData.email || ''}
                       onChange={(e) => handleInputChange('email', e.target.value)}
-                      className="h-11 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                      className="h-11"
                       disabled={loading}
                       required={registrationType === 'email'}
                       data-macaly="email-input"
@@ -240,7 +240,7 @@ function RegisterForm() {
                       placeholder="0612345678 or +212612345678"
                       value={formData.phone || ''}
                       onChange={(e) => handleInputChange('phone', e.target.value)}
-                      className="h-11 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                      className="h-11"
                       disabled={loading}
                       required={registrationType === 'phone'}
                       data-macaly="phone-input"
@@ -261,7 +261,7 @@ function RegisterForm() {
                     placeholder="Enter a secure password"
                     value={formData.password || ''}
                     onChange={(e) => handleInputChange('password', e.target.value)}
-                    className="h-11 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                    className="h-11"
                     disabled={loading}
                     required
                     data-macaly="password-input"
@@ -291,7 +291,7 @@ function RegisterForm() {
 
                 <Button
                   type="submit"
-                  className="w-full h-11 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium transition-all duration-200"
+                  className="w-full h-11"
                   disabled={loading || !formData.name || !formData.password || (!formData.email && !formData.phone)}
                   data-macaly="next-button"
                 >
@@ -319,7 +319,7 @@ function RegisterForm() {
                     placeholder="Your shop name"
                     value={formData.shopName || ''}
                     onChange={(e) => handleInputChange('shopName', e.target.value)}
-                    className="h-11 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                    className="h-11"
                     disabled={loading}
                     required
                     data-macaly="shop-name-input"
@@ -337,7 +337,7 @@ function RegisterForm() {
                     placeholder="Complete shop address"
                     value={formData.shopAddress || ''}
                     onChange={(e) => handleInputChange('shopAddress', e.target.value)}
-                    className="h-11 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                    className="h-11"
                     disabled={loading}
                     required
                     data-macaly="shop-address-input"
@@ -382,7 +382,7 @@ function RegisterForm() {
                     placeholder="0512345678"
                     value={formData.shopPhone || ''}
                     onChange={(e) => handleInputChange('shopPhone', e.target.value)}
-                    className="h-11 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                    className="h-11"
                     disabled={loading}
                     required
                     data-macaly="shop-phone-input"
@@ -398,7 +398,7 @@ function RegisterForm() {
                     placeholder="Brief description of your shop (optional)"
                     value={formData.shopDescription || ''}
                     onChange={(e) => handleInputChange('shopDescription', e.target.value)}
-                    className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                    className=""
                     disabled={loading}
                     rows={3}
                     maxLength={500}
@@ -419,7 +419,7 @@ function RegisterForm() {
                   </Button>
                   <Button
                     type="submit"
-                    className="flex-1 h-11 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium transition-all duration-200"
+                    className="flex-1 h-11"
                     disabled={loading || !formData.shopName || !formData.shopAddress || !formData.shopCategory || !formData.shopPhone}
                     data-macaly="register-button"
                   >
@@ -437,12 +437,12 @@ function RegisterForm() {
             )}
           </form>
 
-          <div className="text-center pt-4 border-t border-gray-200">
-            <p className="text-sm text-gray-600">
+          <div className="text-center pt-4 border-t border-[rgba(0,0,0,0.06)]">
+            <p className="text-sm text-[#615d59]">
               {t('register.cta.haveAccount')}{' '}
               <Link
                 href={`/login?lang=${locale}`}
-                className="font-medium text-blue-600 hover:text-blue-700 transition-colors"
+                className="font-medium text-[#0075de] hover:text-[#005bab] transition-colors"
                 data-macaly="login-link"
               >
                 {t('register.cta.login')}
@@ -458,9 +458,9 @@ function RegisterForm() {
 export default function RegisterPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-amber-50 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-[#f6f5f4] flex items-center justify-center p-4">
         <div className="flex items-center gap-2">
-          <Loader2 className="w-6 h-6 animate-spin text-blue-600" />
+          <Loader2 className="w-6 h-6 animate-spin text-[#0075de]" />
           <span className="text-gray-600">Loading...</span>
         </div>
       </div>

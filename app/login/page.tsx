@@ -91,19 +91,19 @@ function LoginForm() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-amber-50 flex items-center justify-center p-4" data-macaly="login-container">
-      <Card className="w-full max-w-md shadow-lg border-0 bg-white/95 backdrop-blur-sm" data-macaly="login-card">
+    <div className="min-h-screen bg-[#f6f5f4] flex items-center justify-center p-4" data-macaly="login-container">
+      <Card className="w-full max-w-md shadow-notion-lg border-0 bg-white" data-macaly="login-card">
         <CardHeader className="text-center space-y-4" data-macaly="login-header">
           <div className="flex justify-center">
-            <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-amber-500 rounded-xl flex items-center justify-center">
+            <div className="w-16 h-16 bg-[#0075de] rounded-notion-card flex items-center justify-center">
               <Store className="w-8 h-8 text-white" />
             </div>
           </div>
           <div>
-            <CardTitle className="text-2xl font-bold text-gray-900" data-macaly="login-title">
-              CRM الحانوت
+            <CardTitle className="text-card-title font-bold text-[rgba(0,0,0,0.95)]" data-macaly="login-title">
+              Tijara CRM
             </CardTitle>
-            <CardDescription className="text-gray-600 mt-2" data-macaly="login-subtitle">
+            <CardDescription className="text-[#615d59] mt-2" data-macaly="login-subtitle">
               Connectez-vous à votre espace de gestion
             </CardDescription>
           </div>
@@ -128,7 +128,7 @@ function LoginForm() {
                 placeholder="votre@email.com ou 06XXXXXXXX"
                 value={formData.identifier}
                 onChange={(e) => handleInputChange('identifier', e.target.value)}
-                className="h-11 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                className="h-11"
                 disabled={loading}
                 required
                 data-macaly="identifier-input"
@@ -157,7 +157,7 @@ function LoginForm() {
 
             <Button
               type="submit"
-              className="w-full h-11 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium transition-all duration-200"
+              className="w-full h-11"
               disabled={loading}
               data-macaly="login-button"
             >
@@ -172,12 +172,12 @@ function LoginForm() {
             </Button>
           </form>
 
-          <div className="text-center pt-4 border-t border-gray-200">
-            <p className="text-sm text-gray-600">
+          <div className="text-center pt-4 border-t border-[rgba(0,0,0,0.06)]">
+            <p className="text-sm text-[#615d59]">
               Pas encore de compte ?{' '}
               <Link
                 href="/register"
-                className="font-medium text-blue-600 hover:text-blue-700 transition-colors"
+                className="font-medium text-[#0075de] hover:text-[#005bab] transition-colors"
                 data-macaly="register-link"
               >
                 S'inscrire
@@ -193,9 +193,9 @@ function LoginForm() {
 export default function LoginPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-amber-50 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-[#f6f5f4] flex items-center justify-center p-4">
         <div className="flex items-center gap-2">
-          <Loader2 className="w-6 h-6 animate-spin text-blue-600" />
+          <Loader2 className="w-6 h-6 animate-spin text-[#0075de]" />
           <span className="text-gray-600">Loading...</span>
         </div>
       </div>

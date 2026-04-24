@@ -57,7 +57,7 @@ const DevisItemSchema = new Schema({
   },
   total: {
     type: Number,
-    required: [true, 'Total is required'],
+    default: 0,
     min: [0, 'Total cannot be negative'],
   },
 });
@@ -70,8 +70,6 @@ const DevisSchema: Schema = new Schema({
   },
   devisNumber: {
     type: String,
-    required: [true, 'Devis number is required'],
-    unique: true,
     trim: true,
   },
   clientId: {
@@ -124,12 +122,12 @@ const DevisSchema: Schema = new Schema({
   },
   totalHT: {
     type: Number,
-    required: [true, 'Total HT is required'],
+    default: 0,
     min: [0, 'Total HT cannot be negative'],
   },
   tva: {
     type: Number,
-    required: [true, 'TVA is required'],
+    default: 0,
     min: [0, 'TVA cannot be negative'],
   },
   tvaRate: {
@@ -140,7 +138,7 @@ const DevisSchema: Schema = new Schema({
   },
   totalTTC: {
     type: Number,
-    required: [true, 'Total TTC is required'],
+    default: 0,
     min: [0, 'Total TTC cannot be negative'],
   },
   notes: {
@@ -166,7 +164,7 @@ const DevisSchema: Schema = new Schema({
 
 // Indexes
 DevisSchema.index({ userId: 1 });
-DevisSchema.index({ devisNumber: 1 });
+DevisSchema.index({ devisNumber: 1 }, { unique: true });
 DevisSchema.index({ clientId: 1 });
 DevisSchema.index({ status: 1 });
 DevisSchema.index({ createdAt: -1 });

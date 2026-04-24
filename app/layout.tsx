@@ -7,21 +7,21 @@ import { Toaster } from 'sonner';
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "CRM الحانوت - نظام إدارة المحلات التجارية المغربية",
-  description: "نظام إدارة مبسط ومجاني للمحلات التجارية المغربية. إدارة الزبائن، تتبع المبيعات، والديون بكل سهولة. Système de gestion gratuit pour commerces marocains.",
-  keywords: "CRM, Morocco, Hanout, Commerce, Gestion, Clients, Ventes, Maroc, حانوت, إدارة, زبائن, مبيعات",
-  authors: [{ name: "CRM الحانوت Team" }],
+  title: "Tijara CRM — Gestion BTP Maroc",
+  description: "Système de gestion premium pour entreprises BTP marocaines. Devis, chantiers, stock et flux financiers. Simple, moderne et efficace.",
+  keywords: "CRM, BTP, Maroc, Gestion, Devis, Chantier, Stock, Tijara, Construction, Morocco",
+  authors: [{ name: "Tijara CRM" }],
   openGraph: {
-    title: "CRM الحانوت - نظام إدارة المحلات التجارية المغربية",
-    description: "نظام إدارة مبسط ومجاني للمحلات التجارية المغربية",
+    title: "Tijara CRM — Gestion BTP Maroc",
+    description: "Système de gestion premium pour entreprises BTP marocaines",
     type: "website",
-    locale: "ar_MA",
-    alternateLocale: "fr_FR",
+    locale: "fr_FR",
+    alternateLocale: "ar_MA",
   },
   twitter: {
     card: "summary_large_image",
-    title: "CRM الحانوت - نظام إدارة المحلات التجارية المغربية",
-    description: "نظام إدارة مبسط ومجاني للمحلات التجارية المغربية",
+    title: "Tijara CRM — Gestion BTP Maroc",
+    description: "Système de gestion premium pour entreprises BTP marocaines",
   },
 };
 
