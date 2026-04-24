@@ -260,24 +260,24 @@ export default function CustomersPage() {
       <div className="flex items-center justify-center min-h-96">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">{messages.common.loading}</p>
+          <p className="mt-4 text-[#615d59]">{messages.common.loading}</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-gray-50" data-macaly="customers-container">
+    <div className="bg-white" data-macaly="customers-container">
       {/* Main Content */}
       <div data-macaly="customers-main">
         {/* Header */}
-        <div className="bg-white border-b border-gray-200 px-6 py-8">
+        <div className="bg-white border-b border-[rgba(0,0,0,0.06)] px-6 py-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900" data-macaly="customers-title">
+              <h1 className="text-3xl font-bold text-[rgba(0,0,0,0.95)]" data-macaly="customers-title">
                 {messages.customers.title}
               </h1>
-              <p className="text-gray-600 mt-1">
+              <p className="text-[#615d59] mt-1">
                 Gérez vos clients et suivez leurs achats
               </p>
             </div>
@@ -318,11 +318,11 @@ export default function CustomersPage() {
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-gray-600">Total clients</p>
-                    <p className="text-2xl font-bold text-gray-900">{customers.length}</p>
+                    <p className="text-sm font-medium text-[#615d59]">Total clients</p>
+                    <p className="text-2xl font-bold text-[rgba(0,0,0,0.95)]">{customers.length}</p>
                   </div>
-                  <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center">
-                    <Users className="w-6 h-6 text-blue-600" />
+                  <div className="w-12 h-12 bg-[#f2f9ff] rounded-lg flex items-center justify-center">
+                    <Users className="w-6 h-6 text-[#0075de]" />
                   </div>
                 </div>
               </CardContent>
@@ -332,13 +332,13 @@ export default function CustomersPage() {
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-gray-600">Clients avec dette</p>
-                    <p className="text-2xl font-bold text-gray-900">
+                    <p className="text-sm font-medium text-[#615d59]">Clients avec dette</p>
+                    <p className="text-2xl font-bold text-[rgba(0,0,0,0.95)]">
                       {customers.filter(c => c.totalDebt > 0).length}
                     </p>
                   </div>
-                  <div className="w-12 h-12 bg-red-50 rounded-lg flex items-center justify-center">
-                    <CreditCard className="w-6 h-6 text-red-600" />
+                  <div className="w-12 h-12 bg-[#fff0e6] rounded-lg flex items-center justify-center">
+                    <CreditCard className="w-6 h-6 text-[#dd5b00]" />
                   </div>
                 </div>
               </CardContent>
@@ -348,8 +348,8 @@ export default function CustomersPage() {
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-gray-600">Total des dettes</p>
-                    <p className="text-2xl font-bold text-gray-900">
+                    <p className="text-sm font-medium text-[#615d59]">Total des dettes</p>
+                    <p className="text-2xl font-bold text-[rgba(0,0,0,0.95)]">
                       {formatCurrency(customers.reduce((sum, c) => sum + c.totalDebt, 0))}
                     </p>
                   </div>
@@ -366,7 +366,7 @@ export default function CustomersPage() {
             <CardContent className="p-4">
               <div className="flex flex-col md:flex-row gap-4">
                 <div className="flex-1 relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#a39e98] w-4 h-4" />
                   <Input
                     placeholder="Rechercher des clients..."
                     value={searchTerm}
@@ -400,9 +400,9 @@ export default function CustomersPage() {
             <CardContent className="p-0">
               {customers.length === 0 ? (
                 <div className="text-center py-12">
-                  <Users className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                  <p className="text-gray-600">Aucun client trouvé</p>
-                  <p className="text-sm text-gray-500 mt-1">
+                  <Users className="w-12 h-12 text-[#a39e98] mx-auto mb-4" />
+                  <p className="text-[#615d59]">Aucun client trouvé</p>
+                  <p className="text-sm text-[#a39e98] mt-1">
                     Commencez par ajouter votre premier client
                   </p>
                 </div>
@@ -429,7 +429,7 @@ export default function CustomersPage() {
                             <div>
                               <p className="font-medium">{customer.name}</p>
                               {customer.address && (
-                                <p className="text-sm text-gray-500 flex items-center gap-1 mt-1">
+                                <p className="text-sm text-[#a39e98] flex items-center gap-1 mt-1">
                                   <MapPin className="w-3 h-3" />
                                   {customer.address}
                                 </p>
@@ -440,18 +440,18 @@ export default function CustomersPage() {
                             <div className="space-y-1">
                               {customer.phone && (
                                 <p className="text-sm flex items-center gap-1">
-                                  <Phone className="w-3 h-3 text-gray-400" />
+                                  <Phone className="w-3 h-3 text-[#a39e98]" />
                                   {customer.phone}
                                 </p>
                               )}
                               {customer.email && (
                                 <p className="text-sm flex items-center gap-1">
-                                  <Mail className="w-3 h-3 text-gray-400" />
+                                  <Mail className="w-3 h-3 text-[#a39e98]" />
                                   {customer.email}
                                 </p>
                               )}
                               {!customer.phone && !customer.email && (
-                                <span className="text-gray-500 text-sm">-</span>
+                                <span className="text-[#a39e98] text-sm">-</span>
                               )}
                             </div>
                           </TableCell>
@@ -460,18 +460,18 @@ export default function CustomersPage() {
                           </TableCell>
                           <TableCell>
                             {customer.totalDebt > 0 ? (
-                              <span className="font-medium text-red-600">
+                              <span className="font-medium text-[#dd5b00]">
                                 {formatCurrency(customer.totalDebt)}
                               </span>
                             ) : (
-                              <span className="text-gray-500">-</span>
+                              <span className="text-[#a39e98]">-</span>
                             )}
                           </TableCell>
                           <TableCell>
                             {customer.lastPurchaseDate ? (
                               formatDateLocal(customer.lastPurchaseDate)
                             ) : (
-                              <span className="text-gray-500">Jamais</span>
+                              <span className="text-[#a39e98]">Jamais</span>
                             )}
                           </TableCell>
                           <TableCell>
@@ -493,7 +493,7 @@ export default function CustomersPage() {
                                 variant="ghost"
                                 size="sm"
                                 onClick={() => handleDeleteCustomer(customer)}
-                                className="text-red-600 hover:text-red-700"
+                                className="text-[#dd5b00] hover:text-red-700"
                                 data-macaly={`delete-customer-${customer._id}`}
                                 disabled={customer.totalDebt > 0}
                               >

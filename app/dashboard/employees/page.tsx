@@ -216,10 +216,10 @@ export default function EmployeesPage() {
 
   const getRoleBadgeColor = (role: UserRole) => {
     switch (role) {
-      case 'owner': return 'bg-purple-100 text-purple-800';
-      case 'manager': return 'bg-blue-100 text-blue-800';
-      case 'accountant': return 'bg-green-100 text-green-800';
-      case 'cashier': return 'bg-orange-100 text-orange-800';
+      case 'owner': return 'bg-[#f0e6f6] text-[#391c57]';
+      case 'manager': return 'bg-[#f2f9ff] text-[#0075de]';
+      case 'accountant': return 'bg-[#e6f7e9] text-[#1aae39]';
+      case 'cashier': return 'bg-[#fff0e6] text-[#dd5b00]';
       default: return 'bg-gray-100 text-gray-800';
     }
   };
@@ -229,7 +229,7 @@ export default function EmployeesPage() {
       <div className="flex items-center justify-between">
         <div className="space-y-1">
           <h1 className="text-3xl font-bold tracking-tight">Employee Management</h1>
-          <p className="text-gray-600">Manage your shop employees and their roles</p>
+          <p className="text-[#615d59]">Manage your shop employees and their roles</p>
         </div>
         <Dialog open={createDialogOpen} onOpenChange={setCreateDialogOpen}>
           <DialogTrigger asChild>
@@ -377,7 +377,7 @@ export default function EmployeesPage() {
                     <Shield className="w-4 h-4" />
                     <Label className="text-sm font-medium">Custom Permissions</Label>
                   </div>
-                  <p className="text-xs text-gray-600">
+                  <p className="text-xs text-[#615d59]">
                     Customize what this employee can access. Default permissions for {formData.role} are pre-selected.
                   </p>
                   
@@ -413,7 +413,7 @@ export default function EmployeesPage() {
                                   >
                                     {permission.label}
                                   </Label>
-                                  <p className="text-xs text-gray-500">{permission.description}</p>
+                                  <p className="text-xs text-[#a39e98]">{permission.description}</p>
                                 </div>
                               </div>
                             ))}
@@ -560,7 +560,7 @@ export default function EmployeesPage() {
                   <Shield className="w-4 h-4" />
                   <Label className="text-sm font-medium">Custom Permissions</Label>
                 </div>
-                <p className="text-xs text-gray-600">
+                <p className="text-xs text-[#615d59]">
                   Customize what this employee can access. Default permissions for {formData.role} are pre-selected.
                 </p>
                 
@@ -596,7 +596,7 @@ export default function EmployeesPage() {
                                   >
                                     {permission.label}
                                   </Label>
-                                  <p className="text-xs text-gray-500">{permission.description}</p>
+                                  <p className="text-xs text-[#a39e98]">{permission.description}</p>
                                 </div>
                               </div>
                             ))}
@@ -665,9 +665,9 @@ export default function EmployeesPage() {
             </div>
           ) : employees.length === 0 ? (
             <div className="text-center py-8">
-              <Users className="w-12 h-12 mx-auto text-gray-400 mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">No employees yet</h3>
-              <p className="text-gray-600 mb-4">Get started by adding your first employee</p>
+              <Users className="w-12 h-12 mx-auto text-[#a39e98] mb-4" />
+              <h3 className="text-lg font-medium text-[rgba(0,0,0,0.95)] mb-2">No employees yet</h3>
+              <p className="text-[#615d59] mb-4">Get started by adding your first employee</p>
               <Button onClick={() => setCreateDialogOpen(true)}>
                 <Plus className="w-4 h-4 mr-2" />
                 Add Employee
@@ -716,7 +716,7 @@ export default function EmployeesPage() {
                       </span>
                     </TableCell>
                     <TableCell>
-                      <span className="text-sm text-gray-600">
+                      <span className="text-sm text-[#615d59]">
                         {new Date(employee.createdAt).toLocaleDateString()}
                       </span>
                     </TableCell>

@@ -66,16 +66,16 @@ export default function ToastDemo() {
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
-          <Button onClick={handleSuccess} variant="default" className="bg-green-600 hover:bg-green-700">
+          <Button onClick={handleSuccess} variant="default" className="bg-[#1aae39] hover:bg-[#159a31]">
             ✅ Succès
           </Button>
           <Button onClick={handleError} variant="destructive">
             ❌ Erreur
           </Button>
-          <Button onClick={handleWarning} variant="outline" className="border-yellow-500 text-yellow-600 hover:bg-yellow-50">
+          <Button onClick={handleWarning} variant="ghost" className="bg-yellow-50 text-yellow-600 hover:bg-yellow-100">
             ⚠️ Avertissement
           </Button>
-          <Button onClick={handleInfo} variant="outline" className="border-blue-500 text-blue-600 hover:bg-blue-50">
+          <Button onClick={handleInfo} variant="ghost" className="bg-blue-50 text-blue-600 hover:bg-blue-100">
             ℹ️ Information
           </Button>
           <Button onClick={handleLoading} variant="secondary">
@@ -85,7 +85,7 @@ export default function ToastDemo() {
             🔄 Promise
           </Button>
         </div>
-        <div className="pt-4 border-t">
+        <div className="pt-4 mt-4">
           <Button onClick={handleCustomAction} variant="outline" className="w-full">
             🎯 Toast avec Action Personnalisée
           </Button>

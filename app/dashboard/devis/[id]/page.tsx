@@ -185,7 +185,7 @@ export default function DevisDetailPage() {
     const variants: Record<string, { variant: any; label: string; className?: string }> = {
       draft: { variant: 'secondary', label: 'Brouillon' },
       sent: { variant: 'default', label: 'Envoyé' },
-      accepted: { variant: 'default', label: 'Accepté', className: 'bg-green-500' },
+      accepted: { variant: 'default', label: 'Accepté', className: 'bg-[#e6f7e9]0' },
       rejected: { variant: 'destructive', label: 'Refusé' },
     };
 
@@ -400,7 +400,7 @@ export default function DevisDetailPage() {
           </div>
           <div className="flex justify-between text-2xl border-t pt-3">
             <span className="font-bold">Total TTC:</span>
-            <span className="font-bold text-blue-600">
+            <span className="font-bold text-[#0075de]">
               {formatCurrency(devis.totalTTC)}
             </span>
           </div>

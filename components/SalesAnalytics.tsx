@@ -80,14 +80,14 @@ interface SalesAnalyticsProps {
 
 // Color palette for charts
 const COLORS = [
-  '#3B82F6', // Blue
-  '#10B981', // Green
-  '#F59E0B', // Amber
-  '#EF4444', // Red
-  '#8B5CF6', // Purple
-  '#06B6D4', // Cyan
-  '#F97316', // Orange
-  '#84CC16', // Lime
+  '#0075de', // Primary Blue
+  '#1aae39', // Success
+  '#dd5b00', // Warning
+  '#2a9d99', // Info
+  '#391c57', // Premium
+  '#097fe8', // Focus Blue
+  '#005bab', // Active Blue
+  '#615d59', // Gray text
 ];
 
 export default function SalesAnalytics({ className, locale }: SalesAnalyticsProps) {
@@ -290,12 +290,12 @@ export default function SalesAnalytics({ className, locale }: SalesAnalyticsProp
     format?: 'number' | 'currency' | 'text' | 'short';
   }) => {
     const colorClasses = {
-      blue: 'bg-blue-50 text-blue-600 border-blue-200',
-      green: 'bg-green-50 text-green-600 border-green-200',
-      red: 'bg-red-50 text-red-600 border-red-200',
-      yellow: 'bg-yellow-50 text-yellow-600 border-yellow-200',
-      purple: 'bg-purple-50 text-purple-600 border-purple-200',
-      orange: 'bg-orange-50 text-orange-600 border-orange-200'
+      blue: 'bg-[#f2f9ff] text-[#0075de]',
+      green: 'bg-[#e6f7f6] text-[#1aae39]',
+      red: 'bg-[#fff0e6] text-[#dd5b00]',
+      yellow: 'bg-[#fff0e6] text-[#dd5b00]',
+      purple: 'bg-[#f0e6f6] text-[#391c57]',
+      orange: 'bg-[#fff0e6] text-[#dd5b00]'
     };
 
     const formatValue = (val: number | string) => {
@@ -308,7 +308,7 @@ export default function SalesAnalytics({ className, locale }: SalesAnalyticsProp
     const title = t(titleKey, locale);
 
     return (
-      <div className={`bg-white rounded-lg border-2 ${colorClasses[color].split(' ')[3]} p-4 transition-all duration-200 hover:shadow-md`}>
+      <div className={`bg-white rounded-xl p-4 transition-all duration-200`}>
         <div className="flex items-center justify-between">
           <div className="flex-1 min-w-0">
             <div className="text-sm font-medium text-gray-900">{title}</div>
@@ -456,13 +456,13 @@ export default function SalesAnalytics({ className, locale }: SalesAnalyticsProp
             {/* Gradient definition */}
             <defs>
               <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.8" />
-                <stop offset="50%" stopColor="#10B981" stopOpacity="0.9" />
-                <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0.8" />
+                <stop offset="0%" stopColor="#0075de" stopOpacity="0.8" />
+                <stop offset="50%" stopColor="#1aae39" stopOpacity="0.9" />
+                <stop offset="100%" stopColor="#391c57" stopOpacity="0.8" />
               </linearGradient>
               <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.2" />
-                <stop offset="100%" stopColor="#3B82F6" stopOpacity="0.05" />
+                <stop offset="0%" stopColor="#0075de" stopOpacity="0.15" />
+                <stop offset="100%" stopColor="#0075de" stopOpacity="0.01" />
               </linearGradient>
             </defs>
 
@@ -491,7 +491,6 @@ export default function SalesAnalytics({ className, locale }: SalesAnalyticsProp
                 strokeDasharray: '1000',
                 strokeDashoffset: '1000',
                 animation: 'drawLine 2s ease-in-out forwards',
-                filter: 'drop-shadow(0 2px 4px rgba(59, 130, 246, 0.3))'
               }}
             />
 
@@ -521,8 +520,8 @@ export default function SalesAnalytics({ className, locale }: SalesAnalyticsProp
                       cx={x}
                       cy={y}
                       r="8"
-                      fill="#3B82F6"
-                      className="opacity-20 animate-ping"
+                      fill="#0075de"
+                      className="opacity-10 animate-pulse"
                     />
                   )}
 
@@ -531,13 +530,10 @@ export default function SalesAnalytics({ className, locale }: SalesAnalyticsProp
                     cx={x}
                     cy={y}
                     r={isHovered ? "6" : "4"}
-                    fill="#3B82F6"
+                    fill="#0075de"
                     stroke="white"
                     strokeWidth="2"
                     className="transition-all duration-200 cursor-pointer"
-                    style={{
-                      filter: isHovered ? 'drop-shadow(0 4px 8px rgba(59, 130, 246, 0.4))' : 'none'
-                    }}
                   />
                 </g>
               );
@@ -640,11 +636,8 @@ export default function SalesAnalytics({ className, locale }: SalesAnalyticsProp
                     y={y}
                     width={barWidth}
                     height={barHeight}
-                    fill={isHovered ? "#EF4444" : "#F87171"}
+                    fill={isHovered ? "#dd5b00" : "#ff9c5a"}
                     className="transition-all duration-200 cursor-pointer"
-                    style={{
-                      filter: isHovered ? 'drop-shadow(0 4px 8px rgba(239, 68, 68, 0.4))' : 'none'
-                    }}
                     onMouseEnter={(e) => handleMouseMove(e, i)}
                     onMouseMove={(e) => handleMouseMove(e, i)}
                     onMouseLeave={() => setHoveredBar(null)}
@@ -673,7 +666,7 @@ export default function SalesAnalytics({ className, locale }: SalesAnalyticsProp
         {/* Tooltip */}
         {hoveredBar !== null && (
           <div
-            className="absolute z-10 bg-white border border-gray-200 rounded-lg shadow-lg p-3 pointer-events-none transform -translate-x-1/2 -translate-y-full"
+            className="absolute z-10 bg-white rounded-xl p-3 pointer-events-none transform -translate-x-1/2 -translate-y-full"
             style={{
               left: `${tooltipPosition.x}px`,
               top: `${tooltipPosition.y - 10}px`
@@ -763,11 +756,8 @@ export default function SalesAnalytics({ className, locale }: SalesAnalyticsProp
                     y={y}
                     width={barWidth}
                     height={barHeight}
-                    fill={isHovered ? '#f97316' : '#fb923c'}
+                    fill={isHovered ? '#dd5b00' : '#ff9c5a'}
                     className="transition-all duration-200 cursor-pointer"
-                    style={{
-                      filter: isHovered ? 'drop-shadow(0 4px 8px rgba(249, 115, 22, 0.4))' : 'none'
-                    }}
                     onMouseEnter={(e) => handleMouseMove(e, i)}
                     onMouseMove={(e) => handleMouseMove(e, i)}
                     onMouseLeave={() => setHoveredBar(null)}
@@ -808,7 +798,7 @@ export default function SalesAnalytics({ className, locale }: SalesAnalyticsProp
         {/* Tooltip */}
         {hoveredBar !== null && (
           <div
-            className="absolute z-10 bg-white border border-gray-200 rounded-lg shadow-lg p-3 pointer-events-none transform -translate-x-1/2 -translate-y-full"
+            className="absolute z-10 bg-white rounded-xl p-3 pointer-events-none transform -translate-x-1/2 -translate-y-full"
             style={{
               left: `${tooltipPosition.x}px`,
               top: `${tooltipPosition.y - 10}px`
@@ -888,11 +878,8 @@ export default function SalesAnalytics({ className, locale }: SalesAnalyticsProp
                     y={y}
                     width={barWidth}
                     height={barHeight}
-                    fill={isHovered ? '#059669' : '#10b981'}
+                    fill={isHovered ? '#1aae39' : '#4ade80'}
                     className="transition-all duration-200 cursor-pointer"
-                    style={{
-                      filter: isHovered ? 'drop-shadow(0 4px 8px rgba(5, 150, 105, 0.4))' : 'none'
-                    }}
                     onMouseEnter={(e) => handleMouseMove(e, i)}
                     onMouseMove={(e) => handleMouseMove(e, i)}
                     onMouseLeave={() => setHoveredBar(null)}
@@ -949,7 +936,7 @@ export default function SalesAnalytics({ className, locale }: SalesAnalyticsProp
         {/* Tooltip */}
         {hoveredBar !== null && (
           <div
-            className="absolute z-10 bg-white border border-gray-200 rounded-lg shadow-lg p-3 pointer-events-none transform -translate-x-1/2 -translate-y-full"
+            className="absolute z-10 bg-white rounded-xl p-3 pointer-events-none transform -translate-x-1/2 -translate-y-full"
             style={{
               left: `${tooltipPosition.x}px`,
               top: `${tooltipPosition.y - 10}px`
@@ -1073,9 +1060,6 @@ export default function SalesAnalytics({ className, locale }: SalesAnalyticsProp
                     fill={isHovered ? `url(#gradient-${index})` : item.color}
                     className="transition-all duration-300 cursor-pointer"
                     style={{
-                      filter: isHovered
-                        ? 'drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15))'
-                        : 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))',
                       transformOrigin: `${center}px ${center}px`
                     }}
                     onMouseEnter={(e) => handleMouseEnter(e, item, index)}
@@ -1110,8 +1094,6 @@ export default function SalesAnalytics({ className, locale }: SalesAnalyticsProp
               cy={center}
               r={innerRadius}
               fill="white"
-              stroke="#f3f4f6"
-              strokeWidth="2"
             />
 
             {/* Center text */}
@@ -1143,7 +1125,7 @@ export default function SalesAnalytics({ className, locale }: SalesAnalyticsProp
           {/* Enhanced tooltip */}
           {tooltipData && (
             <div
-              className="absolute z-20 bg-white border border-gray-200 rounded-lg shadow-xl p-3 pointer-events-none transform -translate-x-1/2 -translate-y-full"
+              className="absolute z-20 bg-white rounded-xl p-3 pointer-events-none transform -translate-x-1/2 -translate-y-full"
               style={{
                 left: tooltipData.x,
                 top: tooltipData.y - 10
@@ -1171,7 +1153,7 @@ export default function SalesAnalytics({ className, locale }: SalesAnalyticsProp
             {data.map((item, index) => (
               <div
                 key={index}
-                className={`flex items-center space-x-3 p-2 rounded-lg transition-all duration-200 cursor-pointer ${hoveredSegment === index ? 'bg-gray-50 shadow-sm' : 'hover:bg-gray-50'
+                className={`flex items-center space-x-3 p-2 rounded-lg transition-all duration-200 cursor-pointer ${hoveredSegment === index ? 'bg-[#f6f5f4]' : 'hover:bg-[#f6f5f4]'
                   }`}
                 onMouseEnter={() => setHoveredSegment(index)}
                 onMouseLeave={() => setHoveredSegment(null)}
@@ -1344,75 +1326,81 @@ export default function SalesAnalytics({ className, locale }: SalesAnalyticsProp
         {/* Charts Section */}
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
           {/* Sales Trend Chart */}
-          <div className="col-span-1 xl:col-span-2 chart-container">
+          <Card className="col-span-1 xl:col-span-2 chart-container p-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6">
               <div className="flex items-center space-x-3">
                 <h3 className="text-xl font-semibold text-gray-900 font-dm-sans">
                   📈 Évolution des ventes - 30 derniers jours
                 </h3>
                 {trendDirection === 'up' && (
-                  <TrendingUp className="w-5 h-5 text-emerald-500" />
+                  <TrendingUp className="w-5 h-5 text-[#1aae39]" />
                 )}
                 {trendDirection === 'down' && (
-                  <TrendingDown className="w-5 h-5 text-red-500" />
+                  <TrendingDown className="w-5 h-5 text-[#dd5b00]" />
                 )}
               </div>
-              <button
+              <Button
+                variant="outline"
+                size="sm"
                 onClick={() => exportChart('trend')}
-                className="btn-secondary text-sm px-4 py-2"
+                className="bg-white"
               >
                 <Download className="w-4 h-4 mr-2" />
                 Export
-              </button>
+              </Button>
             </div>
             <div className="h-80">
               <SimpleLineChart data={salesTrendData} />
             </div>
-          </div>
+          </Card>
 
           {/* Category Breakdown Chart */}
-          <div className="col-span-1 chart-container">
+          <Card className="col-span-1 chart-container p-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6">
               <div className="flex items-center space-x-3">
                 <h3 className="text-xl font-semibold text-gray-900 font-dm-sans">
                   💰 Répartition du chiffre d'affaires par catégorie
                 </h3>
-                <BarChart3 className="w-5 h-5 text-purple-500" />
+                <BarChart3 className="w-5 h-5 text-[#391c57]" />
               </div>
-              <button
+              <Button
+                variant="outline"
+                size="sm"
                 onClick={() => exportChart('category')}
-                className="btn-secondary text-sm px-4 py-2"
+                className="bg-white"
               >
                 <Download className="w-4 h-4 mr-2" />
                 Export
-              </button>
+              </Button>
             </div>
             <div className="h-80">
               <SimplePieChart data={categoryData} />
             </div>
-          </div>
+          </Card>
 
           {/* Customer Sales Chart */}
-          <div className="col-span-1 chart-container">
+          <Card className="col-span-1 chart-container p-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6">
               <div className="flex items-center space-x-3">
                 <h3 className="text-xl font-semibold text-gray-900 font-dm-sans">
                   👥 Ventes par client
                 </h3>
-                <Users className="w-5 h-5 text-blue-500" />
+                <Users className="w-5 h-5 text-[#0075de]" />
               </div>
-              <button
+              <Button
+                variant="outline"
+                size="sm"
                 onClick={() => exportChart('customerSales')}
-                className="btn-secondary text-sm px-4 py-2"
+                className="bg-white"
               >
                 <Download className="w-4 h-4 mr-2" />
                 Export
-              </button>
+              </Button>
             </div>
             <div className="h-80">
               <CustomerSalesChart data={customerSalesData} />
             </div>
-          </div>
+          </Card>
 
           {/* Returns Chart */}
           <Card className="col-span-1 chart-container overflow-hidden">

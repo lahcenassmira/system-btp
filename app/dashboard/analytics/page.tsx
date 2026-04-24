@@ -107,9 +107,9 @@ export default function AnalyticsPage() {
     format?: 'number' | 'currency' | 'text';
   }) => {
     const colorClasses = {
-      blue: 'bg-blue-50 text-blue-600',
-      green: 'bg-green-50 text-green-600',
-      red: 'bg-red-50 text-red-600',
+      blue: 'bg-[#f2f9ff] text-[#0075de]',
+      green: 'bg-[#e6f7e9] text-[#1aae39]',
+      red: 'bg-[#fff0e6] text-[#dd5b00]',
       yellow: 'bg-yellow-50 text-yellow-600',
       purple: 'bg-purple-50 text-purple-600'
     };
@@ -125,8 +125,8 @@ export default function AnalyticsPage() {
         <CardContent className="p-4 sm:p-6">
           <div className="flex items-center justify-between">
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-600 truncate">{title}</p>
-              <p className="text-xl sm:text-2xl font-bold text-gray-900 mt-1">
+              <p className="text-sm font-medium text-[#615d59] truncate">{title}</p>
+              <p className="text-xl sm:text-2xl font-bold text-[rgba(0,0,0,0.95)] mt-1">
                 {formatValue(value)}
               </p>
               {trend && trendValue && (
@@ -134,9 +134,9 @@ export default function AnalyticsPage() {
                   {trend === 'up' ? (
                     <TrendingUp className="w-4 h-4 mr-1 text-green-500" />
                   ) : (
-                    <TrendingDown className="w-4 h-4 mr-1 text-red-500" />
+                    <TrendingDown className="w-4 h-4 mr-1 text-[#dd5b00]" />
                   )}
-                  <span className={`text-sm ${trend === 'up' ? 'text-green-600' : 'text-red-600'}`}>
+                  <span className={`text-sm ${trend === 'up' ? 'text-[#1aae39]' : 'text-[#dd5b00]'}`}>
                     {trendValue}
                   </span>
                 </div>
@@ -156,34 +156,34 @@ export default function AnalyticsPage() {
       <div className="flex items-center justify-center min-h-96">
                   <div className="text-center">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
-            <p className="mt-4 text-gray-600">{t('common.loading')}</p>
+            <p className="mt-4 text-[#615d59]">{t('common.loading')}</p>
           </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-gray-50" data-macaly="analytics">
+    <div  data-macaly="analytics">
       {/* Main Content */}
       <div data-macaly="analytics-main">
         {/* Header */}
-        <div className="bg-white border-b border-gray-200 px-4 sm:px-6 py-6 sm:py-8">
+        <div className=" border-b border-[rgba(0,0,0,0.06)] px-4 sm:px-6 py-6 sm:py-8">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-4 sm:space-y-0">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900" data-macaly="analytics-title">
+              <h1 className="text-2xl sm:text-3xl font-bold text-[rgba(0,0,0,0.95)]" data-macaly="analytics-title">
                 {t('analytics.title')}
               </h1>
-              <p className="text-gray-600 mt-1">
+              <p className="text-[#615d59] mt-1">
                 {t('analytics.subtitle')}
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
+            <div className="flex  flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
               {/* Period Selector */}
-              <div className="flex items-center space-x-2">
-                <Calendar className="w-4 h-4 text-gray-400" />
+              <div className="flex items-center space-x-2 bg-white  p-2 rounded-xl">
+                <Calendar className="w-4 h-4 text-[#a39e98] " />
                 <Select value={selectedPeriod} onValueChange={setSelectedPeriod}>
-                  <SelectTrigger className="w-32">
+                  <SelectTrigger className="w-32 bg-white ">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -266,12 +266,12 @@ export default function AnalyticsPage() {
               <CardContent className="p-4 sm:p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-gray-600">{t('analytics.period')}</p>
-                    <p className="text-xl sm:text-2xl font-bold text-gray-900 mt-1">
+                    <p className="text-sm font-medium text-[#615d59]">{t('analytics.period')}</p>
+                    <p className="text-xl sm:text-2xl font-bold text-[rgba(0,0,0,0.95)] mt-1">
                       {selectedPeriod} {t('analytics.lastDays')}
                     </p>
                   </div>
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-50 text-gray-600 rounded-lg flex items-center justify-center flex-shrink-0 ml-4">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12  text-[#615d59] rounded-lg flex items-center justify-center flex-shrink-0 ml-4">
                     <Calendar className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
                 </div>
@@ -282,7 +282,7 @@ export default function AnalyticsPage() {
           {/* Charts Section */}
           <div className="space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-2 sm:space-y-0">
-              <h2 className="text-xl sm:text-2xl font-bold text-gray-900">{t('analytics.charts.salesTrend')}</h2>
+              <h2 className="text-xl sm:text-2xl font-bold text-[rgba(0,0,0,0.95)]">{t('analytics.charts.salesTrend')}</h2>
               <Badge variant="outline" className="text-sm self-start sm:self-auto">
                 {t('analytics.lastDays')} {selectedPeriod} {t('analytics.lastDays')}
               </Badge>
@@ -292,8 +292,8 @@ export default function AnalyticsPage() {
           </div>
 
           {error && (
-            <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-              <p className="text-red-600">{error}</p>
+            <div className="bg-[#fff0e6] border border-red-200 rounded-lg p-4">
+              <p className="text-[#dd5b00]">{error}</p>
             </div>
           )}
         </div>

@@ -344,24 +344,24 @@ export default function SalesPage() {
       <div className="flex items-center justify-center min-h-96">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">{messages.common.loading}</p>
+          <p className="mt-4 text-[#615d59]">{messages.common.loading}</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-gray-50" data-macaly="sales-container">
+    <div className="bg-white" data-macaly="sales-container">
       {/* Main Content */}
       <div data-macaly="sales-main">
         {/* Header */}
-        <div className="bg-white border-b border-gray-200 px-6 py-8">
+        <div className="bg-white border-b border-[rgba(0,0,0,0.06)] px-6 py-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900" data-macaly="sales-title">
+              <h1 className="text-3xl font-bold text-[rgba(0,0,0,0.95)]" data-macaly="sales-title">
                 {messages.sales.title}
               </h1>
-              <p className="text-gray-600 mt-1">
+              <p className="text-[#615d59] mt-1">
                 Enregistrez et suivez vos ventes
               </p>
             </div>
@@ -404,7 +404,7 @@ export default function SalesPage() {
                           <SelectItem key={product._id} value={product._id}>
                             <div className="flex justify-between items-center w-full">
                               <span>{product.name}</span>
-                              <span className="text-sm text-gray-500 ml-2">
+                              <span className="text-sm text-[#a39e98] ml-2">
                                 {product.quantity} {product.unit}
                               </span>
                             </div>
@@ -416,7 +416,7 @@ export default function SalesPage() {
 
                   {/* Product Info */}
                   {selectedProduct && (
-                    <div className="p-3 bg-blue-50 rounded-lg border border-blue-200">
+                    <div className="p-3 bg-[#f2f9ff] rounded-lg border border-blue-200">
                       <div className="flex justify-between items-center">
                         <div>
                           <p className="font-medium text-blue-900">{selectedProduct.name}</p>
@@ -481,7 +481,7 @@ export default function SalesPage() {
                   </div>
 
                   {/* Total */}
-                  <div className="p-3 bg-green-50 rounded-lg border border-green-200">
+                  <div className="p-3 bg-[#e6f7e9] rounded-lg border border-green-200">
                     <div className="flex justify-between items-center">
                       <span className="text-green-700 font-medium">Total:</span>
                       <span className="text-green-900 font-bold text-lg">
@@ -540,7 +540,7 @@ export default function SalesPage() {
                         {/* Option pour aucun client (sauf pour crédit) */}
                         {formData.paymentMethod !== 'credit' && (
                           <SelectItem value="no-customer">
-                            <span className="text-gray-500">{messages.customers.noCustomer}</span>
+                            <span className="text-[#a39e98]">{messages.customers.noCustomer}</span>
                           </SelectItem>
                         )}
                         {customers.map(customer => (
@@ -548,10 +548,10 @@ export default function SalesPage() {
                             <div className="flex flex-col">
                               <span>{customer.name}</span>
                               {customer.phone && (
-                                <span className="text-xs text-gray-500">{customer.phone}</span>
+                                <span className="text-xs text-[#a39e98]">{customer.phone}</span>
                               )}
                               {customer.totalDebt > 0 && (
-                                <span className="text-xs text-red-600">
+                                <span className="text-xs text-[#dd5b00]">
                                   Dette: {formatCurrency(customer.totalDebt)}
                                 </span>
                               )}
@@ -561,7 +561,7 @@ export default function SalesPage() {
                       </SelectContent>
                     </Select>
                     {customers.length === 0 && (
-                      <p className="text-sm text-gray-500">
+                      <p className="text-sm text-[#a39e98]">
                         {formData.paymentMethod === 'credit'
                           ? messages.customers.noCustomersFound
                           : messages.customers.noCustomersFoundGeneral
@@ -589,7 +589,7 @@ export default function SalesPage() {
                         max={calculateTotal()}
                         disabled={submitting}
                       />
-                      <p className="text-xs text-gray-600">
+                      <p className="text-xs text-[#615d59]">
                         Reste à payer: {formatCurrency(calculateTotal() - formData.paidAmount)}
                       </p>
                     </div>
@@ -653,9 +653,9 @@ export default function SalesPage() {
             <CardContent className="p-0">
               {sales.length === 0 ? (
                 <div className="text-center py-12">
-                  <ShoppingCart className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                  <p className="text-gray-600">Aucune vente enregistrée</p>
-                  <p className="text-sm text-gray-500 mt-1">
+                  <ShoppingCart className="w-12 h-12 text-[#a39e98] mx-auto mb-4" />
+                  <p className="text-[#615d59]">Aucune vente enregistrée</p>
+                  <p className="text-sm text-[#a39e98] mt-1">
                     Commencez par enregistrer votre première vente
                   </p>
                 </div>
@@ -690,11 +690,11 @@ export default function SalesPage() {
                             <div>
                               <p className="font-medium">{sale.customerId.name}</p>
                               {sale.customerId.phone && (
-                                <p className="text-xs text-gray-500">{sale.customerId.phone}</p>
+                                <p className="text-xs text-[#a39e98]">{sale.customerId.phone}</p>
                               )}
                             </div>
                           ) : (
-                            <span className="text-gray-500">-</span>
+                            <span className="text-[#a39e98]">-</span>
                           )}
                         </TableCell>
                         <TableCell>
@@ -725,7 +725,7 @@ export default function SalesPage() {
                             variant="outline"
                             size="sm"
                             onClick={() => handleReturnClick(sale)}
-                            className="transition-all duration-200 hover:bg-red-50 hover:border-red-300"
+                            className="transition-all duration-200 hover:bg-[#fff0e6] hover:border-red-300"
                           >
                             <RotateCcw className="w-4 h-4 mr-2" />
                             Return

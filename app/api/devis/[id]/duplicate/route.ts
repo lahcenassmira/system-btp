@@ -6,7 +6,7 @@ import { getUserFromRequest } from '@/lib/auth';
 // POST /api/devis/:id/duplicate - Duplicate devis
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = getUserFromRequest(request);
@@ -16,8 +16,10 @@ export async function POST(
 
     await connectDB();
 
+    const { id } = await params;
+
     const originalDevis = await Devis.findOne({
-      _id: params.id,
+      _id: id,
       userId: user.userId,
     });
 

@@ -190,7 +190,7 @@ export default function DevisPage() {
 
     const config = variants[status] || variants.draft;
     return (
-      <Badge variant={config.variant} className={status === 'accepted' ? 'bg-green-500' : ''}>
+      <Badge variant={config.variant} className={status === 'accepted' ? 'bg-[#e6f7e9]0' : ''}>
         {config.label}
       </Badge>
     );
@@ -356,7 +356,7 @@ export default function DevisPage() {
                                 setSelectedDevis(devis._id);
                                 setDeleteDialogOpen(true);
                               }}
-                              className="text-red-600"
+                              className="text-[#dd5b00]"
                             >
                               <Trash2 className="mr-2 h-4 w-4" />
                               Supprimer

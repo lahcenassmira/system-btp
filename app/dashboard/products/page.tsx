@@ -233,24 +233,24 @@ export default function ProductsPage() {
       <div className="flex items-center justify-center min-h-96">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">{messages.common.loading}</p>
+          <p className="mt-4 text-[#615d59]">{messages.common.loading}</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-gray-50" data-macaly="products-container">
+    <div className="bg-white" data-macaly="products-container">
       {/* Main Content */}
       <div data-macaly="products-main">
         {/* Header */}
-        <div className="bg-white border-b border-gray-200 px-6 py-8">
+        <div className="bg-white border-b border-[rgba(0,0,0,0.06)] px-6 py-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900" data-macaly="products-title">
+              <h1 className="text-3xl font-bold text-[rgba(0,0,0,0.95)]" data-macaly="products-title">
                 {messages.products.title}
               </h1>
-              <p className="text-gray-600 mt-1">
+              <p className="text-[#615d59] mt-1">
                 Gérez votre inventaire et stock
               </p>
             </div>
@@ -430,7 +430,7 @@ export default function ProductsPage() {
             <CardContent className="p-4">
               <div className="flex flex-col md:flex-row gap-4">
                 <div className="flex-1 relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#a39e98] w-4 h-4" />
                   <Input
                     placeholder="Rechercher des produits..."
                     value={searchTerm}
@@ -478,9 +478,9 @@ export default function ProductsPage() {
             <CardContent className="p-0">
               {products.length === 0 ? (
                 <div className="text-center py-12">
-                  <Package className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                  <p className="text-gray-600">Aucun produit trouvé</p>
-                  <p className="text-sm text-gray-500 mt-1">
+                  <Package className="w-12 h-12 text-[#a39e98] mx-auto mb-4" />
+                  <p className="text-[#615d59]">Aucun produit trouvé</p>
+                  <p className="text-sm text-[#a39e98] mt-1">
                     Commencez par ajouter votre premier produit
                   </p>
                 </div>
@@ -508,14 +508,14 @@ export default function ProductsPage() {
                             <div>
                               <p className="font-medium">{product.name}</p>
                               {product.category && (
-                                <p className="text-sm text-gray-500">{product.category}</p>
+                                <p className="text-sm text-[#a39e98]">{product.category}</p>
                               )}
                             </div>
                           </TableCell>
                           <TableCell>
-                            <span className={`font-medium ${product.quantity <= 0 ? 'text-red-600' :
+                            <span className={`font-medium ${product.quantity <= 0 ? 'text-[#dd5b00]' :
                               product.quantity <= product.minStockAlert ? 'text-amber-600' :
-                                'text-gray-900'
+                                'text-[rgba(0,0,0,0.95)]'
                               }`}>
                               {product.quantity} {product.unit}
                             </span>
@@ -523,7 +523,7 @@ export default function ProductsPage() {
                           <TableCell>{formatCurrency(product.buyPrice)}</TableCell>
                           <TableCell className="font-medium">{formatCurrency(product.sellPrice)}</TableCell>
                           <TableCell>
-                            <span className="text-green-600 font-medium">+{margin}%</span>
+                            <span className="text-[#1aae39] font-medium">+{margin}%</span>
                           </TableCell>
                           <TableCell>
                             <Badge variant={stockStatus.color as any}>
@@ -544,7 +544,7 @@ export default function ProductsPage() {
                                 variant="ghost"
                                 size="sm"
                                 onClick={() => handleDeleteProduct(product)}
-                                className="text-red-600 hover:text-red-700"
+                                className="text-[#dd5b00] hover:text-red-700"
                                 data-macaly={`delete-product-${product._id}`}
                               >
                                 <Trash2 className="w-4 h-4" />

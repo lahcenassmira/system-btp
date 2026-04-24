@@ -171,7 +171,7 @@ export default function ReturnDetailsModal({
                 <Button
                   onClick={() => handleStatusUpdate('approved')}
                   disabled={updating}
-                  className="bg-green-600 hover:bg-green-700 text-white"
+                  className="bg-[#1aae39] hover:bg-[#159a31] text-white"
                   size="sm"
                 >
                   <CheckCircle className="w-4 h-4 mr-2" />

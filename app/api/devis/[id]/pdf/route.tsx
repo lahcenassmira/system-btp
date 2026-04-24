@@ -60,7 +60,7 @@ function sanitizeForPDF(obj: any): any {
 // GET /api/devis/:id/pdf - Generate PDF
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = getUserFromRequest(request);
@@ -70,8 +70,11 @@ export async function GET(
 
     await connectDB();
 
+    // Await params in Next.js 15
+    const { id } = await params;
+
     const devis = await Devis.findOne({
-      _id: params.id,
+      _id: id,
       userId: user.userId,
     }).populate('clientId', 'name company phone email address').lean();
 

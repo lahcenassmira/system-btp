@@ -1,5 +1,6 @@
 import { requireAuth } from '@/lib/server-auth';
 import DashboardNavigation from '@/components/DashboardNavigation';
+import DashboardLayoutClient from '@/components/DashboardLayoutClient';
 
 export default async function DashboardLayout({
   children,
@@ -9,11 +10,11 @@ export default async function DashboardLayout({
   const user = await requireAuth('/dashboard');
 
   return (
-    <div className="flex min-h-screen bg-white">
+    <div className="flex min-h-screen bg-[#f6f5f4]">
       <DashboardNavigation user={user} />
-      <div className="flex-1 lg:ml-64">
+      <DashboardLayoutClient>
         {children}
-      </div>
+      </DashboardLayoutClient>
     </div>
   );
 }

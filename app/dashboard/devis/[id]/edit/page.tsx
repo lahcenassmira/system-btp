@@ -20,8 +20,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Plus, Trash2, ArrowLeft } from 'lucide-react';
+import { Plus, Trash2, ArrowLeft, UserPlus } from 'lucide-react';
 import { toast } from 'sonner';
+import AddCustomerDialog from '@/components/AddCustomerDialog';
 
 interface Customer {
   _id: string;
@@ -72,6 +73,12 @@ export default function EditDevisPage() {
     } catch (error) {
       console.error('Error fetching customers:', error);
     }
+  };
+
+  const handleCustomerAdded = (newCustomer: Customer) => {
+    setCustomers((prev) => [...prev, newCustomer]);
+    setFormData((prev) => ({ ...prev, clientId: newCustomer._id }));
+    toast.success('Client ajouté avec succès');
   };
 
   const fetchDevis = async () => {
@@ -216,21 +223,31 @@ export default function EditDevisPage() {
           <CardContent>
             <div>
               <Label htmlFor="clientId">Client *</Label>
-              <Select
-                value={formData.clientId}
-                onValueChange={(value) => handleInputChange('clientId', value)}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Sélectionner un client" />
-                </SelectTrigger>
-                <SelectContent>
-                  {customers.map((customer) => (
-                    <SelectItem key={customer._id} value={customer._id}>
-                      {customer.name} {customer.company && `(${customer.company})`}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <div className="flex gap-2">
+                <Select
+                  value={formData.clientId}
+                  onValueChange={(value) => handleInputChange('clientId', value)}
+                >
+                  <SelectTrigger className="flex-1">
+                    <SelectValue placeholder="Sélectionner un client" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {customers.map((customer) => (
+                      <SelectItem key={customer._id} value={customer._id}>
+                        {customer.name} {customer.company && `(${customer.company})`}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <AddCustomerDialog
+                  onCustomerAdded={handleCustomerAdded}
+                  trigger={
+                    <Button type="button" variant="outline" size="icon">
+                      <UserPlus className="h-4 w-4" />
+                    </Button>
+                  }
+                />
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -300,7 +317,7 @@ export default function EditDevisPage() {
                       size="sm"
                       onClick={() => removeItem(index)}
                     >
-                      <Trash2 className="h-4 w-4 text-red-500" />
+                      <Trash2 className="h-4 w-4 text-[#dd5b00]" />
                     </Button>
                   )}
                 </div>
@@ -384,7 +401,7 @@ export default function EditDevisPage() {
             </div>
             <div className="flex justify-between text-xl border-t pt-2">
               <span className="font-bold">Total TTC:</span>
-              <span className="font-bold text-blue-600">{formatCurrency(totalTTC)}</span>
+              <span className="font-bold text-[#0075de]">{formatCurrency(totalTTC)}</span>
             </div>
           </CardContent>
         </Card>

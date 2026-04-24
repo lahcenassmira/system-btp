@@ -7,10 +7,21 @@ import Customer from '@/models/Customer';
 import { getUserFromRequest } from '@/lib/auth';
 import mongoose from 'mongoose';
 
+// Ensure models are registered
+const ensureModelsLoaded = () => {
+  // This ensures all models are loaded before queries
+  Customer;
+  Product;
+  Sale;
+};
+
 // GET - List returns with filters
 export async function GET(request: NextRequest) {
   try {
     console.log('Returns list request received');
+    
+    // Ensure models are loaded
+    ensureModelsLoaded();
     
     // Check authentication
     const user = getUserFromRequest(request);
@@ -97,6 +108,9 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     console.log('Create return request received');
+    
+    // Ensure models are loaded
+    ensureModelsLoaded();
     
     // Check authentication
     const user = getUserFromRequest(request);

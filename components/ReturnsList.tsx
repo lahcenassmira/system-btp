@@ -508,7 +508,7 @@ export default function ReturnsList({ locale, onReturnUpdate }: ReturnsListProps
             </AlertDialogCancel>
             <AlertDialogAction
               onClick={confirmDeleteReturn}
-              className="bg-red-600 hover:bg-red-700"
+              className="bg-[#dd5b00] hover:bg-[#c45000]"
             >
               Supprimer
             </AlertDialogAction>

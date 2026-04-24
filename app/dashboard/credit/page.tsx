@@ -189,7 +189,7 @@ export default function CreditPage() {
       <div className="flex items-center justify-center min-h-96">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">{messages.common.loading}</p>
+          <p className="mt-4 text-[#615d59]">{messages.common.loading}</p>
         </div>
       </div>
     );
@@ -198,19 +198,19 @@ export default function CreditPage() {
   return (
     <div className="p-6 space-y-6">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200 px-6 py-8 -mx-6 -mt-6">
+      <div className="bg-white border-b border-[rgba(0,0,0,0.06)] px-6 py-8 -mx-6 -mt-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">
+            <h1 className="text-3xl font-bold text-[rgba(0,0,0,0.95)]">
               {messages.credit.title}
             </h1>
-            <p className="text-gray-600 mt-1">
+            <p className="text-[#615d59] mt-1">
               Gérez les ventes à crédit et les paiements
             </p>
           </div>
           <div className="text-right">
-            <p className="text-sm text-gray-600">Dette totale</p>
-            <p className="text-2xl font-bold text-red-600">
+            <p className="text-sm text-[#615d59]">Dette totale</p>
+            <p className="text-2xl font-bold text-[#dd5b00]">
               {formatCurrency(getTotalDebt())}
             </p>
           </div>
@@ -223,11 +223,11 @@ export default function CreditPage() {
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">Clients avec dette</p>
-                <p className="text-2xl font-bold text-gray-900">{customerSummary.length}</p>
+                <p className="text-sm font-medium text-[#615d59]">Clients avec dette</p>
+                <p className="text-2xl font-bold text-[rgba(0,0,0,0.95)]">{customerSummary.length}</p>
               </div>
-              <div className="w-12 h-12 bg-red-50 rounded-lg flex items-center justify-center">
-                <User className="w-6 h-6 text-red-600" />
+              <div className="w-12 h-12 bg-[#fff0e6] rounded-lg flex items-center justify-center">
+                <User className="w-6 h-6 text-[#dd5b00]" />
               </div>
             </div>
           </CardContent>
@@ -237,8 +237,8 @@ export default function CreditPage() {
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">Ventes impayées</p>
-                <p className="text-2xl font-bold text-gray-900">{creditSales.length}</p>
+                <p className="text-sm font-medium text-[#615d59]">Ventes impayées</p>
+                <p className="text-2xl font-bold text-[rgba(0,0,0,0.95)]">{creditSales.length}</p>
               </div>
               <div className="w-12 h-12 bg-amber-50 rounded-lg flex items-center justify-center">
                 <CreditCard className="w-6 h-6 text-amber-600" />
@@ -251,13 +251,13 @@ export default function CreditPage() {
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">Dette totale</p>
-                <p className="text-2xl font-bold text-red-600">
+                <p className="text-sm font-medium text-[#615d59]">Dette totale</p>
+                <p className="text-2xl font-bold text-[#dd5b00]">
                   {formatCurrency(getTotalDebt())}
                 </p>
               </div>
-              <div className="w-12 h-12 bg-red-50 rounded-lg flex items-center justify-center">
-                <DollarSign className="w-6 h-6 text-red-600" />
+              <div className="w-12 h-12 bg-[#fff0e6] rounded-lg flex items-center justify-center">
+                <DollarSign className="w-6 h-6 text-[#dd5b00]" />
               </div>
             </div>
           </CardContent>
@@ -281,7 +281,7 @@ export default function CreditPage() {
                   <SelectItem key={customer._id} value={customer._id}>
                     <div className="flex justify-between items-center w-full">
                       <span>{customer.customer.name}</span>
-                      <span className="text-red-600 ml-2">
+                      <span className="text-[#dd5b00] ml-2">
                         {formatCurrency(customer.totalDebt)}
                       </span>
                     </div>
@@ -322,14 +322,14 @@ export default function CreditPage() {
                     </TableCell>
                     <TableCell>
                       {customer.customer.phone ? (
-                        <p className="text-sm text-gray-600">{customer.customer.phone}</p>
+                        <p className="text-sm text-[#615d59]">{customer.customer.phone}</p>
                       ) : (
-                        <span className="text-gray-500">-</span>
+                        <span className="text-[#a39e98]">-</span>
                       )}
                     </TableCell>
                     <TableCell>{customer.salesCount}</TableCell>
                     <TableCell>
-                      <span className="font-bold text-red-600">
+                      <span className="font-bold text-[#dd5b00]">
                         {formatCurrency(customer.totalDebt)}
                       </span>
                     </TableCell>
@@ -377,10 +377,10 @@ export default function CreditPage() {
           {creditSales.length === 0 ? (
             <div className="text-center py-12">
               <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-4" />
-              <p className="text-gray-600">
+              <p className="text-[#615d59]">
                 {selectedCustomer ? 'Ce client n\'a pas de dette' : 'Aucune vente à crédit impayée'}
               </p>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-[#a39e98] mt-1">
                 Toutes les ventes à crédit ont été payées
               </p>
             </div>
@@ -405,7 +405,7 @@ export default function CreditPage() {
                   const isOverdue = daysOverdue > 30;
 
                   return (
-                    <TableRow key={sale._id} className={isOverdue ? 'bg-red-50' : ''}>
+                    <TableRow key={sale._id} className={isOverdue ? 'bg-[#fff0e6]' : ''}>
                       <TableCell className="text-sm">
                         {formatDateLocal(sale.saleDate)}
                       </TableCell>
@@ -413,7 +413,7 @@ export default function CreditPage() {
                         <div>
                           <p className="font-medium">{sale.customerId.name}</p>
                           {sale.customerId.phone && (
-                            <p className="text-xs text-gray-500">{sale.customerId.phone}</p>
+                            <p className="text-xs text-[#a39e98]">{sale.customerId.phone}</p>
                           )}
                         </div>
                       </TableCell>
@@ -426,11 +426,11 @@ export default function CreditPage() {
                       <TableCell className="font-medium">
                         {formatCurrency(sale.totalAmount)}
                       </TableCell>
-                      <TableCell className="text-green-600">
+                      <TableCell className="text-[#1aae39]">
                         {formatCurrency(sale.paidAmount)}
                       </TableCell>
                       <TableCell>
-                        <span className="font-bold text-red-600">
+                        <span className="font-bold text-[#dd5b00]">
                           {formatCurrency(sale.remainingAmount)}
                         </span>
                       </TableCell>
@@ -482,26 +482,26 @@ export default function CreditPage() {
           {selectedSale && (
             <div className="space-y-4">
               {/* Sale Details */}
-              <div className="p-4 bg-gray-50 rounded-lg space-y-2">
+              <div className="p-4 bg-white rounded-lg space-y-2">
                 <div className="flex justify-between">
-                  <span className="text-sm text-gray-600">Client:</span>
+                  <span className="text-sm text-[#615d59]">Client:</span>
                   <span className="font-medium">{selectedSale.customerId.name}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm text-gray-600">Produit:</span>
+                  <span className="text-sm text-[#615d59]">Produit:</span>
                   <span className="font-medium">{selectedSale.productId.name}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm text-gray-600">Total vente:</span>
+                  <span className="text-sm text-[#615d59]">Total vente:</span>
                   <span className="font-bold">{formatCurrency(selectedSale.totalAmount)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm text-gray-600">Déjà payé:</span>
-                  <span className="text-green-600">{formatCurrency(selectedSale.paidAmount)}</span>
+                  <span className="text-sm text-[#615d59]">Déjà payé:</span>
+                  <span className="text-[#1aae39]">{formatCurrency(selectedSale.paidAmount)}</span>
                 </div>
                 <div className="flex justify-between border-t pt-2">
-                  <span className="text-sm font-medium text-gray-900">Reste à payer:</span>
-                  <span className="font-bold text-red-600">{formatCurrency(selectedSale.remainingAmount)}</span>
+                  <span className="text-sm font-medium text-[rgba(0,0,0,0.95)]">Reste à payer:</span>
+                  <span className="font-bold text-[#dd5b00]">{formatCurrency(selectedSale.remainingAmount)}</span>
                 </div>
               </div>
 
@@ -522,7 +522,7 @@ export default function CreditPage() {
                     required
                     disabled={submitting}
                   />
-                  <p className="text-xs text-gray-600">
+                  <p className="text-xs text-[#615d59]">
                     Maximum: {formatCurrency(selectedSale.remainingAmount)}
                   </p>
                 </div>

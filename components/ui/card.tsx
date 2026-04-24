@@ -9,7 +9,7 @@ const Card = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      'rounded-notion-card border border-[rgba(0,0,0,0.06)] bg-white text-card-foreground shadow-notion-sm transition-all duration-200',
+      'rounded-xl bg-white text-card-foreground transition-all duration-200',
       className
     )}
     {...props}

@@ -108,26 +108,26 @@ export default function ReturnsPage() {
   };
 
   return (
-    <div className="bg-gray-50">
+    <div >
       {/* Main Content */}
       <div>
         {/* Header */}
-        <div className="bg-white border-b border-gray-200 px-4 sm:px-6 py-6 sm:py-8">
+        <div className="border-b border-[rgba(0,0,0,0.06)] px-4 sm:px-6 py-6 sm:py-8">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-4 sm:space-y-0">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 flex items-center gap-3">
-                <RotateCcw className="h-8 w-8 text-red-500" />
+              <h1 className="text-2xl sm:text-3xl font-bold text-[rgba(0,0,0,0.95)] flex items-center gap-3">
+                <RotateCcw className="h-8 w-8 text-[#dd5b00]" />
                 {messages.returns.title}
               </h1>
-              <p className="text-gray-600 mt-1">
+              <p className="text-[#615d59] mt-1">
                 {messages.returns.subtitle}
               </p>
             </div>
-            <div className="flex flex-col sm:flex-row gap-2">
+            <div className="flex  flex-col sm:flex-row gap-2">
               <Button
                 onClick={fetchReturnStats}
                 variant="outline"
-                className="transition-all duration-200 hover:bg-gray-50"
+                className="transition-all duration-200 bg-white"
               >
                 <RefreshCw className="w-4 h-4 mr-2" />
                 {messages.dashboard.refresh}
@@ -135,7 +135,7 @@ export default function ReturnsPage() {
               <Button
                 onClick={handleExportReturns}
                 variant="outline"
-                className="transition-all duration-200 hover:bg-blue-50 hover:border-blue-300"
+                className="transition-all duration-200 bg-white"
               >
                 <Download className="w-4 h-4 mr-2" />
                 {messages.dashboard.export}
@@ -152,18 +152,18 @@ export default function ReturnsPage() {
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-gray-600 mb-1">
+                    <p className="text-sm font-medium text-[#615d59] mb-1">
                       {messages.returns.returnedOrders}
                     </p>
-                    <p className="text-2xl font-bold text-gray-900 mb-1">
+                    <p className="text-2xl font-bold text-[rgba(0,0,0,0.95)] mb-1">
                       {stats.totalReturns}
                     </p>
-                    <p className="text-xs text-gray-500">
+                    <p className="text-xs text-[#a39e98]">
                       Total returns
                     </p>
                   </div>
-                  <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center">
-                    <Package className="w-6 h-6 text-blue-600" />
+                  <div className="w-12 h-12 bg-[#f2f9ff] rounded-lg flex items-center justify-center">
+                    <Package className="w-6 h-6 text-[#0075de]" />
                   </div>
                 </div>
               </CardContent>
@@ -173,13 +173,13 @@ export default function ReturnsPage() {
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-gray-600 mb-1">
+                    <p className="text-sm font-medium text-[#615d59] mb-1">
                       {messages.returns.pending}
                     </p>
-                    <p className="text-2xl font-bold text-gray-900 mb-1">
+                    <p className="text-2xl font-bold text-[rgba(0,0,0,0.95)] mb-1">
                       {stats.pendingReturns}
                     </p>
-                    <p className="text-xs text-gray-500">
+                    <p className="text-xs text-[#a39e98]">
                       Awaiting review
                     </p>
                   </div>
@@ -194,18 +194,18 @@ export default function ReturnsPage() {
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-gray-600 mb-1">
+                    <p className="text-sm font-medium text-[#615d59] mb-1">
                       {messages.returns.approved}
                     </p>
-                    <p className="text-2xl font-bold text-gray-900 mb-1">
+                    <p className="text-2xl font-bold text-[rgba(0,0,0,0.95)] mb-1">
                       {stats.approvedReturns}
                     </p>
-                    <p className="text-xs text-gray-500">
+                    <p className="text-xs text-[#a39e98]">
                       Processed returns
                     </p>
                   </div>
-                  <div className="w-12 h-12 bg-green-50 rounded-lg flex items-center justify-center">
-                    <TrendingUp className="w-6 h-6 text-green-600" />
+                  <div className="w-12 h-12 bg-[#e6f7e9] rounded-lg flex items-center justify-center">
+                    <TrendingUp className="w-6 h-6 text-[#1aae39]" />
                   </div>
                 </div>
               </CardContent>
@@ -215,18 +215,18 @@ export default function ReturnsPage() {
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-gray-600 mb-1">
+                    <p className="text-sm font-medium text-[#615d59] mb-1">
                       {messages.returns.refundAmount}
                     </p>
-                    <p className="text-2xl font-bold text-gray-900 mb-1">
+                    <p className="text-2xl font-bold text-[rgba(0,0,0,0.95)] mb-1">
                       {formatCurrency(stats.totalRefundAmount)}
                     </p>
-                    <p className="text-xs text-gray-500">
+                    <p className="text-xs text-[#a39e98]">
                       Total refunds
                     </p>
                   </div>
-                  <div className="w-12 h-12 bg-red-50 rounded-lg flex items-center justify-center">
-                    <DollarSign className="w-6 h-6 text-red-600" />
+                  <div className="w-12 h-12 bg-[#fff0e6] rounded-lg flex items-center justify-center">
+                    <DollarSign className="w-6 h-6 text-[#dd5b00]" />
                   </div>
                 </div>
               </CardContent>

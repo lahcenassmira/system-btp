@@ -7,7 +7,7 @@ import { getUserFromRequest } from '@/lib/auth';
 // GET /api/devis/:id - Get single devis
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = getUserFromRequest(request);
@@ -17,8 +17,10 @@ export async function GET(
 
     await connectDB();
 
+    const { id } = await params;
+
     const devis = await Devis.findOne({
-      _id: params.id,
+      _id: id,
       userId: user.userId,
     }).populate('clientId', 'name company phone email address');
 
@@ -39,7 +41,7 @@ export async function GET(
 // PUT /api/devis/:id - Update devis
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = getUserFromRequest(request);
@@ -49,6 +51,7 @@ export async function PUT(
 
     await connectDB();
 
+    const { id } = await params;
     const body = await request.json();
     const {
       clientId,
@@ -63,7 +66,7 @@ export async function PUT(
 
     // Find existing devis
     const devis = await Devis.findOne({
-      _id: params.id,
+      _id: id,
       userId: user.userId,
     });
 
@@ -120,7 +123,7 @@ export async function PUT(
 // DELETE /api/devis/:id - Delete devis
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = getUserFromRequest(request);
@@ -130,8 +133,10 @@ export async function DELETE(
 
     await connectDB();
 
+    const { id } = await params;
+
     const devis = await Devis.findOne({
-      _id: params.id,
+      _id: id,
       userId: user.userId,
     });
 
@@ -147,7 +152,7 @@ export async function DELETE(
       );
     }
 
-    await Devis.deleteOne({ _id: params.id });
+    await Devis.deleteOne({ _id: id });
 
     return NextResponse.json(
       { message: 'Devis deleted successfully' },

@@ -102,12 +102,9 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)',
       },
 
-      /* ── Shadows ── */
+      /* ── Shadows (Removed as per design system) ── */
       boxShadow: {
-        'notion-sm': '0 1px 3px 0 rgba(0,0,0,0.04), 0 1px 2px -1px rgba(0,0,0,0.03)',
-        'notion-md': '0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -2px rgba(0,0,0,0.03)',
-        'notion-lg': '0 10px 15px -3px rgba(0,0,0,0.06), 0 4px 6px -4px rgba(0,0,0,0.03)',
-        'notion-focus': '0 0 0 3px rgba(9, 127, 232, 0.25)',
+        none: 'none',
       },
 
       /* ── Background Images ── */

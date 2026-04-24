@@ -239,7 +239,7 @@ export default function PurchasesPage() {
       <div className="flex items-center justify-center min-h-96">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">{messages.common.loading}</p>
+          <p className="mt-4 text-[#615d59]">{messages.common.loading}</p>
         </div>
       </div>
     );
@@ -249,17 +249,17 @@ export default function PurchasesPage() {
   const todayTotal = todayPurchases.reduce((sum, p) => sum + p.totalAmount, 0);
 
   return (
-    <div className="bg-gray-50" data-macaly="purchases-container">
+    <div  data-macaly="purchases-container">
       {/* Main Content */}
       <div data-macaly="purchases-main">
         {/* Header */}
-        <div className="bg-white border-b border-gray-200 px-6 py-8">
+        <div className="border-b border-[rgba(0,0,0,0.06)] px-6 py-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900" data-macaly="purchases-title">
+              <h1 className="text-3xl font-bold text-[rgba(0,0,0,0.95)]" data-macaly="purchases-title">
                 {messages.purchases?.title || 'Gestion des achats'}
               </h1>
-              <p className="text-gray-600 mt-1">
+              <p className="text-[#615d59] mt-1">
                 Gérez vos achats et approvisionnements
               </p>
             </div>
@@ -302,7 +302,7 @@ export default function PurchasesPage() {
                           <SelectItem key={product._id} value={product._id}>
                             <div className="flex justify-between items-center w-full">
                               <span>{product.name}</span>
-                              <span className="text-sm text-gray-500 ml-2">
+                              <span className="text-sm text-[#a39e98] ml-2">
                                 Stock: {product.quantity} {product.unit}
                               </span>
                             </div>
@@ -314,7 +314,7 @@ export default function PurchasesPage() {
 
                   {/* Product Info */}
                   {selectedProduct && (
-                    <div className="p-3 bg-blue-50 rounded-lg border border-blue-200">
+                    <div className="p-3 bg-[#f2f9ff] rounded-lg border border-blue-200">
                       <div className="flex justify-between items-center">
                         <div>
                           <p className="font-medium text-blue-900">{selectedProduct.name}</p>
@@ -364,7 +364,7 @@ export default function PurchasesPage() {
                   </div>
 
                   {/* Total */}
-                  <div className="p-3 bg-green-50 rounded-lg border border-green-200">
+                  <div className="p-3 bg-[#e6f7e9] rounded-lg border border-green-200">
                     <div className="flex justify-between items-center">
                       <span className="text-green-700 font-medium">Total achat:</span>
                       <span className="text-green-900 font-bold text-lg">
@@ -461,11 +461,11 @@ export default function PurchasesPage() {
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-gray-600">Achats aujourd'hui</p>
-                    <p className="text-2xl font-bold text-gray-900">{todayPurchases.length}</p>
+                    <p className="text-sm font-medium text-[#615d59]">Achats aujourd'hui</p>
+                    <p className="text-2xl font-bold text-[rgba(0,0,0,0.95)]">{todayPurchases.length}</p>
                   </div>
-                  <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center">
-                    <Calendar className="w-6 h-6 text-blue-600" />
+                  <div className="w-12 h-12 bg-[#f2f9ff] rounded-lg flex items-center justify-center">
+                    <Calendar className="w-6 h-6 text-[#0075de]" />
                   </div>
                 </div>
               </CardContent>
@@ -475,13 +475,13 @@ export default function PurchasesPage() {
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-gray-600">Montant aujourd'hui</p>
-                    <p className="text-2xl font-bold text-gray-900">
+                    <p className="text-sm font-medium text-[#615d59]">Montant aujourd'hui</p>
+                    <p className="text-2xl font-bold text-[rgba(0,0,0,0.95)]">
                       {formatCurrency(todayTotal)}
                     </p>
                   </div>
-                  <div className="w-12 h-12 bg-green-50 rounded-lg flex items-center justify-center">
-                    <TrendingUp className="w-6 h-6 text-green-600" />
+                  <div className="w-12 h-12 bg-[#e6f7e9] rounded-lg flex items-center justify-center">
+                    <TrendingUp className="w-6 h-6 text-[#1aae39]" />
                   </div>
                 </div>
               </CardContent>
@@ -491,8 +491,8 @@ export default function PurchasesPage() {
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-gray-600">Total des achats</p>
-                    <p className="text-2xl font-bold text-gray-900">
+                    <p className="text-sm font-medium text-[#615d59]">Total des achats</p>
+                    <p className="text-2xl font-bold text-[rgba(0,0,0,0.95)]">
                       {formatCurrency(getTotalPurchasesAmount())}
                     </p>
                   </div>
@@ -507,8 +507,8 @@ export default function PurchasesPage() {
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-gray-600">Fournisseurs</p>
-                    <p className="text-2xl font-bold text-gray-900">
+                    <p className="text-sm font-medium text-[#615d59]">Fournisseurs</p>
+                    <p className="text-2xl font-bold text-[rgba(0,0,0,0.95)]">
                       {getUniqueSuppliers().length}
                     </p>
                   </div>
@@ -534,9 +534,9 @@ export default function PurchasesPage() {
             <CardContent className="p-0">
               {purchases.length === 0 ? (
                 <div className="text-center py-12">
-                  <ShoppingBag className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                  <p className="text-gray-600">Aucun achat enregistré</p>
-                  <p className="text-sm text-gray-500 mt-1">
+                  <ShoppingBag className="w-12 h-12 text-[#a39e98] mx-auto mb-4" />
+                  <p className="text-[#615d59]">Aucun achat enregistré</p>
+                  <p className="text-sm text-[#a39e98] mt-1">
                     Commencez par enregistrer votre premier achat
                   </p>
                 </div>
@@ -563,18 +563,18 @@ export default function PurchasesPage() {
                           <div>
                             <p className="font-medium">{purchase.productId.name}</p>
                             {purchase.productId.category && (
-                              <p className="text-xs text-gray-500">{purchase.productId.category}</p>
+                              <p className="text-xs text-[#a39e98]">{purchase.productId.category}</p>
                             )}
                           </div>
                         </TableCell>
                         <TableCell>
                           {purchase.supplier ? (
                             <div className="flex items-center gap-1">
-                              <Truck className="w-3 h-3 text-gray-400" />
+                              <Truck className="w-3 h-3 text-[#a39e98]" />
                               <span className="text-sm">{purchase.supplier}</span>
                             </div>
                           ) : (
-                            <span className="text-gray-500">-</span>
+                            <span className="text-[#a39e98]">-</span>
                           )}
                         </TableCell>
                         <TableCell>
@@ -591,11 +591,11 @@ export default function PurchasesPage() {
                         <TableCell>
                           {purchase.invoiceNumber ? (
                             <div className="flex items-center gap-1">
-                              <FileText className="w-3 h-3 text-gray-400" />
+                              <FileText className="w-3 h-3 text-[#a39e98]" />
                               <span className="text-sm">{purchase.invoiceNumber}</span>
                             </div>
                           ) : (
-                            <span className="text-gray-500">-</span>
+                            <span className="text-[#a39e98]">-</span>
                           )}
                         </TableCell>
                       </TableRow>
