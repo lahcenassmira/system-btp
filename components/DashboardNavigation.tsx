@@ -159,7 +159,7 @@ export default function DashboardNavigation({ user }: DashboardNavigationProps) 
   const NavContent = ({ isMobile = false }) => (
     <div className={`flex flex-col ${isMobile ? 'h-full' : 'h-screen'}  transition-all duration-300`}>
       {/* Brand Header */}
-      <div className={`p-4 ${isCollapsed && !isMobile ? 'md:p-2' : 'md:p-6'} transition-all border-b border-gray-200 duration-300`}>
+      <div className={` ${isCollapsed && !isMobile ? 'md:p-2' : 'md:p-4'} transition-all border-b border-gray-200 duration-300`}>
         <div className={`flex items-center ${isCollapsed && !isMobile ? 'justify-center' : 'gap-3 md:gap-4'}`}>
           <div className="relative flex-shrink-0">
             <Image
@@ -260,12 +260,8 @@ export default function DashboardNavigation({ user }: DashboardNavigationProps) 
         )}
 
         {/* User Info & Logout */}
-        <div className="space-y-3">
-          {(!isCollapsed || isMobile) && (
-            <div className="text-badge-text text-[#a39e98]">
-              <p className="font-medium text-[#615d59] truncate">{user.email || user.phone}</p>
-            </div>
-          )}
+        <div className="space-y-2">
+        
           <Button
             onClick={handleLogout}
             variant="ghost"

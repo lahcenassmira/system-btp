@@ -585,7 +585,7 @@ export default function SalesAnalytics({ className, locale }: SalesAnalyticsProp
     const [hoveredBar, setHoveredBar] = useState<number | null>(null);
     const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
 
-    const maxReturns = Math.max(...data.map(d => d.returns));
+    const maxReturns = Math.max(...data.map(d => d.returns), 1); // Ensure minimum of 1
 
     const handleMouseMove = (event: React.MouseEvent, index: number) => {
       const svgRect = event.currentTarget.closest('svg')?.getBoundingClientRect();
@@ -624,7 +624,7 @@ export default function SalesAnalytics({ className, locale }: SalesAnalyticsProp
             {data.map((d, i) => {
               const barWidth = 800 / data.length * 0.8;
               const x = (i / data.length) * 800 + (800 / data.length - barWidth) / 2;
-              const barHeight = maxReturns > 0 ? (d.returns / maxReturns) * 160 : 0;
+              const barHeight = d.returns > 0 ? Math.max((d.returns / maxReturns) * 160, 3) : 0; // Minimum 3px height
               const y = 180 - barHeight;
               const isHovered = hoveredBar === i;
 
@@ -716,7 +716,7 @@ export default function SalesAnalytics({ className, locale }: SalesAnalyticsProp
       );
     }
 
-    const maxRate = Math.max(...data.map(d => d.returnRate));
+    const maxRate = Math.max(...data.map(d => d.returnRate), 1); // Ensure minimum of 1
     const chartHeight = 200;
     const chartWidth = 400;
     const barWidth = Math.max(20, (chartWidth - 40) / data.length - 10);
@@ -755,7 +755,7 @@ export default function SalesAnalytics({ className, locale }: SalesAnalyticsProp
                     x={x}
                     y={y}
                     width={barWidth}
-                    height={barHeight}
+                    height={Math.max(barHeight, 3)} // Minimum 3px height
                     fill={isHovered ? '#dd5b00' : '#ff9c5a'}
                     className="transition-all duration-200 cursor-pointer"
                     onMouseEnter={(e) => handleMouseMove(e, i)}

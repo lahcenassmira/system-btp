@@ -267,11 +267,11 @@ export default function CustomersPage() {
   }
 
   return (
-    <div className="bg-white" data-macaly="customers-container">
+    <div  data-macaly="customers-container">
       {/* Main Content */}
       <div data-macaly="customers-main">
         {/* Header */}
-        <div className="bg-white border-b border-[rgba(0,0,0,0.06)] px-6 py-8">
+        <div className=" border-b border-[rgba(0,0,0,0.06)] px-6 py-8">
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-3xl font-bold text-[rgba(0,0,0,0.95)]" data-macaly="customers-title">
@@ -313,10 +313,10 @@ export default function CustomersPage() {
         {/* Content */}
         <div className="p-6 space-y-6">
           {/* Customer Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1  md:grid-cols-3 gap-6">
             <Card>
-              <CardContent className="p-6">
-                <div className="flex items-center justify-between">
+              <CardContent className="p-6 ">
+                <div className="flex items-center  p-2 justify-between">
                   <div>
                     <p className="text-sm font-medium text-[#615d59]">Total clients</p>
                     <p className="text-2xl font-bold text-[rgba(0,0,0,0.95)]">{customers.length}</p>
@@ -365,13 +365,13 @@ export default function CustomersPage() {
           <Card>
             <CardContent className="p-4">
               <div className="flex flex-col md:flex-row gap-4">
-                <div className="flex-1 relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#a39e98] w-4 h-4" />
+                <div className="flex-1  relative ">
+                  <Search className="absolute right-2 top-1/2 transform -translate-y-1/2 text-[#a39e98] w-4 h-4" />
                   <Input
                     placeholder="Rechercher des clients..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-10"
+                    className=" pl-10"
                     data-macaly="search-customers"
                   />
                 </div>
